@@ -147,17 +147,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Addons.h" />
+    <ClInclude Include="AutomatSteuerung.h" />
+    <ClInclude Include="Band.h" />
+    <ClInclude Include="BandSteuerung.h" />
+    <ClInclude Include="Blech.h" />
+    <ClInclude Include="Ofen.h" />
+    <ClInclude Include="OfenSteuerung.h" />
+    <ClInclude Include="PlaetzchenAutomat.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TextDateiLesen.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Alfa-Back-Console.cpp" />
+    <ClCompile Include="AutomatSteuerung.cpp" />
+    <ClCompile Include="Band.cpp" />
+    <ClCompile Include="BandSteuerung.cpp" />
+    <ClCompile Include="Blech.cpp" />
+    <ClCompile Include="Ofen.cpp" />
+    <ClCompile Include="OfenSteuerung.cpp" />
+    <ClCompile Include="PlaetzchenAutomat.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TextDateiLesen.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
