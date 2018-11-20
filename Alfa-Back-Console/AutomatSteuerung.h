@@ -1,7 +1,8 @@
 #pragma once
-class AutomatSteuerung 
+class AutomatSteuerung
 {
 public:
+	int JobQueueStatus = 4;
 	void plaetzchenAnzahlErmitteln();
 	void blechAnzahlErmitteln();
 	void blechBelegen();

@@ -3,10 +3,11 @@
 
 class Band : public BandSteuerung
 {
-	double Geschwindigkeit;
+	int Geschwindigkeit;
 public:
-	void getGeschwindigkeit();
+	int getGeschwindigkeit();
 	void setGeschwindigkeit(int Geschwind);
+	bool GetGeschwindigkeitStatus();
 	Band();
 	~Band();
 };

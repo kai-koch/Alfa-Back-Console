@@ -4,8 +4,9 @@
 #include <string>
 using namespace std;
 
-void Band::getGeschwindigkeit()
+int Band::getGeschwindigkeit()
 {
+	return Geschwindigkeit;
 }
 
 void Band::setGeschwindigkeit(int Geschwind)
@@ -13,6 +14,15 @@ void Band::setGeschwindigkeit(int Geschwind)
 	Geschwindigkeit = Geschwind;
 	cout << "Band::setGeschwindigkeit(int Geschwind)" << endl;
 
+}
+
+bool Band::GetGeschwindigkeitStatus()
+{
+	if (Geschwindigkeit = 0)
+	{
+		return false;
+	}
+	return true;
 }
 
 Band::Band()

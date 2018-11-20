@@ -1,7 +1,7 @@
 #pragma once
 #include "OfenSteuerung.h"
 
-class Ofen : public OfenSteuerung
+class Ofen
 {
 private:
 	double Temperatur;

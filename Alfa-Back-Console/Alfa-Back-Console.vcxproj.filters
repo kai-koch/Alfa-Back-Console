@@ -48,6 +48,9 @@
     <ClInclude Include="BandSteuerung.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="ParameterListe.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -78,6 +81,9 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="OfenSteuerung.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="ParameterListe.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

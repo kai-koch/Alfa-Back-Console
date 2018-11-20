@@ -154,6 +154,7 @@
     <ClInclude Include="Blech.h" />
     <ClInclude Include="Ofen.h" />
     <ClInclude Include="OfenSteuerung.h" />
+    <ClInclude Include="ParameterListe.h" />
     <ClInclude Include="PlaetzchenAutomat.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="Blech.cpp" />
     <ClCompile Include="Ofen.cpp" />
     <ClCompile Include="OfenSteuerung.cpp" />
+    <ClCompile Include="ParameterListe.cpp" />
     <ClCompile Include="PlaetzchenAutomat.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
