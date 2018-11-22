@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Addons.h" />
+    <ClInclude Include="AusnahmenUndThreadsMon.h" />
     <ClInclude Include="AutomatSteuerung.h" />
     <ClInclude Include="Band.h" />
     <ClInclude Include="BandSteuerung.h" />
@@ -164,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Alfa-Back-Console.cpp" />
+    <ClCompile Include="AusnahmenUndThreadsMon.cpp" />
     <ClCompile Include="AutomatSteuerung.cpp" />
     <ClCompile Include="Band.cpp" />
     <ClCompile Include="BandSteuerung.cpp" />
