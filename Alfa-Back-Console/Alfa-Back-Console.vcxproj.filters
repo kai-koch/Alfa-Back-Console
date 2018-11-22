@@ -51,6 +51,12 @@
     <ClInclude Include="ParameterListe.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="rezept.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="zutat.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -84,6 +90,12 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="ParameterListe.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="rezept.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="zutat.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

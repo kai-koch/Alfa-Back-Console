@@ -156,9 +156,11 @@
     <ClInclude Include="OfenSteuerung.h" />
     <ClInclude Include="ParameterListe.h" />
     <ClInclude Include="PlaetzchenAutomat.h" />
+    <ClInclude Include="rezept.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TextDateiLesen.h" />
+    <ClInclude Include="zutat.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Alfa-Back-Console.cpp" />
@@ -170,6 +172,7 @@
     <ClCompile Include="OfenSteuerung.cpp" />
     <ClCompile Include="ParameterListe.cpp" />
     <ClCompile Include="PlaetzchenAutomat.cpp" />
+    <ClCompile Include="rezept.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -177,6 +180,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TextDateiLesen.cpp" />
+    <ClCompile Include="zutat.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
