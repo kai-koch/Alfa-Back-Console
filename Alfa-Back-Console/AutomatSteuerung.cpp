@@ -37,51 +37,43 @@ void AutomatSteuerung::blechBelegen()
 void AutomatSteuerung::Backen(int Zeit)
 {
 	std::queue<int> BackProzessTimerBenachrichtigung;
-	std::mutex Exception_mutex;
+	std::mutex Backen_mutex;
 	std::condition_variable cond_Backen;
 	bool gemacht = false;
 	bool informiert = false;
 	bool ZusammenfassungState = true;
 
 	std::thread BackProzessTimer([&]() {
-
-		while (BackProzessTimerStatus = true)
+		//BackProzessTimerStatus
+		cout << "AutomatSteuerung::Backen(int Zeit) - Der Kuchen wird gebacken - " << Zeit << endl << endl;
+		
+		for (int i = 0; i < Zeit; ++i)
 		{
-			
-			cout << "AutomatSteuerung::Backen(int Zeit) - Der Kuchen wird gebacken - " << Zeit << endl << endl;
-			std::this_thread::sleep_for(std::chrono::seconds(Zeit));
-
-			BackProzessTimerStatus = false;
-			//if Test Condition
-			Band Bnd;
-			Bnd.setGeschwindigkeit(0);
-
-			if (BackProzessTimerStatus == false)
-			{
-				std::unique_lock<std::mutex> lock(Exception_mutex);
-				std::cout << "Zeit abgelaufen - " << Zeit << " - Minuten" << endl;
-				BackProzessTimerBenachrichtigung.push(Zeit);
-				informiert = true;
-				gemacht = true;
-				cond_Backen.notify_one();
-
-			}
-			//if Test Matrix Condition
+			std::this_thread::sleep_for(std::chrono::seconds(1));
+			std::unique_lock<std::mutex> lock(Backen_mutex);
+			BackProzessTimerBenachrichtigung.push(i);
+			informiert = true;
+			cond_Backen.notify_one();
 		}
 
-		//gemacht = true;
+		Band Bnd;
+		Bnd.setGeschwindigkeit(0);
+
+        std::cout << "Event BackZeit " << Zeit << '\n';
+		BackProzessTimerBenachrichtigung.push(Zeit);
+		gemacht = true;
 		informiert = true;
 		cond_Backen.notify_one();
 	});
 
 	std::thread BackProzessTimerNotifer([&]() {
-		std::unique_lock<std::mutex> lock(Exception_mutex);
+		std::unique_lock<std::mutex> lock(Backen_mutex);
 		while (!gemacht) {
 			while (!informiert) {  // Schleife, um störendes Aufwecken zu vermeiden
 				cond_Backen.wait(lock);
 			}
 			while (!BackProzessTimerBenachrichtigung.empty()) {
-				std::cout << endl << "Backprozess erfolgreich beendet - " << BackProzessTimerBenachrichtigung.front() << " - Minuten" << endl;
+				std::cout << "Backprozess erfolgreich beendet - " << BackProzessTimerBenachrichtigung.front() << " - Minuten" << endl;
 				BackProzessTimerBenachrichtigung.pop();
 			}
 			informiert = false;
