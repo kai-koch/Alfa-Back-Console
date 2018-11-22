@@ -31,3 +31,7 @@ void cls()
 		cout << string(100, ' ');
 	pos(0, 0);
 }
+
+//timer(std::chrono::seconds(5), &hello);
+//std::cout << "Launched\n";
+//std::this_thread::sleep_for(std::chrono::seconds(10));

@@ -1,6 +1,7 @@
 #pragma once
 class AutomatSteuerung
 {
+	bool BackProzessTimerStatus = true;
 public:
 	int JobQueueStatus = 4;
 	void plaetzchenAnzahlErmitteln();

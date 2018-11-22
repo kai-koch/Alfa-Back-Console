@@ -16,6 +16,10 @@ double Ofen::getTemperatur()
 void Ofen::setTemperatur(int TemperaturIN)
 {
 	Temperatur = TemperaturIN;
+	if (TemperaturIN == 0)
+	{
+
+	}
 	cout << "Ofen::setTemperatur(int Temperatur) - " << Temperatur << endl;
 }
 
