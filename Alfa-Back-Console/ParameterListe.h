@@ -17,10 +17,11 @@
 #include <iostream>
 #include <functional>
 #include <string>
+#include "AutomatSteuerung.h"
 using namespace std;
 
 
-class ParameterListe // Status 3
+class ParameterListe : public AutomatSteuerung // Status 3
 {
 	struct Param
 	{

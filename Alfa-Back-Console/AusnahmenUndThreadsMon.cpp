@@ -67,8 +67,8 @@ bool AusnahmenUndThreadsMon::StartAusnahmenMonitor()
 		}
 	});
 
-	ExceptionsAusloeser.join();
-	ExceptionsMonitor.join();
+	ExceptionsAusloeser.join();//
+	ExceptionsMonitor.join();//
 	return true;
 }
 

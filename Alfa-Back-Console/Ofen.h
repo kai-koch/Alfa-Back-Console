@@ -1,10 +1,11 @@
 #pragma once
 #include "OfenSteuerung.h"
 
-class Ofen
+
+class Ofen //: public OfenSteuerung
 {
 private:
-	double Temperatur;
+	double Temperatur = 0;
 public:
 	double getTemperatur();
 	void setTemperatur(int Temperatur);

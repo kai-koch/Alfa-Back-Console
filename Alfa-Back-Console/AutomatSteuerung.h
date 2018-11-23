@@ -1,9 +1,10 @@
 #pragma once
+
 class AutomatSteuerung
 {
-	bool BackProzessTimerStatus = true;
+	bool BackProzessTimerStatus = false; // 1 Prozess Lock
 public:
-	int JobQueueStatus = 4;
+	int JobQueueStatus;
 	void plaetzchenAnzahlErmitteln();
 	void blechAnzahlErmitteln();
 	void blechBelegen();
@@ -15,3 +16,4 @@ public:
 	AutomatSteuerung();
 	~AutomatSteuerung();
 };
+

@@ -8,6 +8,7 @@
 #include <iostream>
 #include <queue>
 #include <chrono>
+#include <sstream>
 using namespace std;
 #include "addons.h"
 #include "Band.h"
@@ -36,15 +37,25 @@ void AutomatSteuerung::blechBelegen()
 
 void AutomatSteuerung::Backen(int Zeit)
 {
+
+	if (BackProzessTimerStatus == false)
+	{
+		BackProzessTimerStatus = true;
+
 	std::queue<int> BackProzessTimerBenachrichtigung;
 	std::mutex Backen_mutex;
 	std::condition_variable cond_Backen;
 	bool gemacht = false;
 	bool informiert = false;
 	bool ZusammenfassungState = true;
+	double progress = 0.0; //float
+	double EventStatus1;
+	string S;
+	int intStern = 0;
+
 
 	std::thread BackProzessTimer([&]() {
-		//BackProzessTimerStatus
+		
 		cout << "AutomatSteuerung::Backen(int Zeit) - Der Kuchen wird gebacken - " << Zeit << endl << endl;
 		
 		for (int i = 0; i < Zeit; ++i)
@@ -59,6 +70,8 @@ void AutomatSteuerung::Backen(int Zeit)
 		Band Bnd;
 		Bnd.setGeschwindigkeit(0);
 
+		cls();
+
         std::cout << "Event BackZeit " << Zeit << '\n';
 		BackProzessTimerBenachrichtigung.push(Zeit);
 		gemacht = true;
@@ -72,16 +85,72 @@ void AutomatSteuerung::Backen(int Zeit)
 			while (!informiert) {  // Schleife, um störendes Aufwecken zu vermeiden
 				cond_Backen.wait(lock);
 			}
-			while (!BackProzessTimerBenachrichtigung.empty()) {
-				std::cout << "Backprozess erfolgreich beendet - " << BackProzessTimerBenachrichtigung.front() << " - Minuten" << endl;
+			while (!BackProzessTimerBenachrichtigung.empty())
+			{
+				//std::cout << "Backprozess erfolgreich beendet - " << BackProzessTimerBenachrichtigung.front() << " - Minuten" << endl;
+				///////////////////////////////////////////////////////////////////////
+					S.clear();
+					S.append("Backprozess erfolgreich beendet - ");
+					S.append(std::to_string(BackProzessTimerBenachrichtigung.front()));
+					S.append(" - Minuten  ");
+					if (intStern == 0) { intStern = 1; S.append(" / "); }
+					else if (intStern == 1){ intStern = 2; S.append(" - "); }
+					else if (intStern == 2){ intStern = 3; S.append(" \\ "); }
+					else if (intStern == 3){ intStern = 4; S.append(" / "); }
+					else if (intStern == 4) { intStern = 5;  S.append(" - "); }
+					else if (intStern == 5) { intStern = 0;  S.append(" \\ "); }
+
+					wstringstream titleStream;
+					titleStream << "Counting to " << S.c_str();
+					SetConsoleTitle(titleStream.str().c_str());
+
+					///////////////////////////////////////////////////////////////////////
+					if (progress < 1.0)
+					{
+						int BackProgressGroese = 70;
+
+						std::cout << "[";
+						int pos = BackProgressGroese * progress;
+						for (int i = 0; i < BackProgressGroese; ++i) {
+							if (i < pos) std::cout << "=";
+							else if (i == pos) std::cout << ">";
+							else std::cout << " ";
+						}
+						std::cout << "] " << int(progress * 100.0) << " %\r";
+						std::cout.flush();
+
+						progress += static_cast<double>(1) / Zeit;
+					}
+					std::cout << std::endl;
+					//////////////////////////////////////////////////////////////////////////////////
+
+
+				//std::cout << std::endl;
+				//////////////////////////////////////////////////////////////////////////////////
+
 				BackProzessTimerBenachrichtigung.pop();
 			}
 			informiert = false;
 		}
 	});
 
-	BackProzessTimer.join();
+	BackProzessTimerStatus = false; // Nur 1 Prozess Lock
+
+	BackProzessTimer.join(); //join();
 	BackProzessTimerNotifer.join(); //detach();
+
+	
+	/*detach() Trennt den Ausführungs - Thread vom Thread - Objekt wodurch dieser unabhängig 
+	fortgeführt werden kann.Alle zugewiesenen Ressourcen werden freigegeben 
+	sobald der Thread endet.
+
+		Nach dem Aufruf von detach() gelten folgende Bedingungen :
+
+	*this hält keinen Thread mehr
+		joinable() == false
+		get_id() == std::thread::id()*/
+
+	} // If 
 
 	//return true;
 }

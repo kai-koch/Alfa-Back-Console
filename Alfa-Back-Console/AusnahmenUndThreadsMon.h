@@ -1,5 +1,7 @@
 #pragma once
-class AusnahmenUndThreadsMon
+#include "AutomatSteuerung.h"
+
+class AusnahmenUndThreadsMon  : public AutomatSteuerung
 {
 	bool AusnahmenMonitorStatus = true;
 public:
@@ -10,4 +12,3 @@ public:
 	AusnahmenUndThreadsMon();
 	~AusnahmenUndThreadsMon();
 };
-

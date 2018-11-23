@@ -30,6 +30,9 @@ void cls()
 	for (int j = 0; j<100; j++)
 		cout << string(100, ' ');
 	pos(0, 0);
+
+	void COUTFuncIntro();
+
 }
 
 //timer(std::chrono::seconds(5), &hello);
