@@ -68,6 +68,7 @@ bool AusnahmenUndThreadsMon::StartAusnahmenMonitor()
 			while (!ErstellteExceptionMatrix.empty()) {
 				std::cout << "Ausnahme wurde verwaltet" << ErstellteExceptionMatrix.front() << endl;
 
+				divider();
 				ErstellteExceptionMatrix.pop();
 			}
 			informiert = false;
