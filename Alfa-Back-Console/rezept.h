@@ -13,14 +13,14 @@ private:
 	* Key: Zutatenname, Value: Instanz der Klasse Zutat fuer Basisanzahl
 	* von Keksen
 	*/
-	map <string, zutat > * zutaten;
+	map <string, zutat >  zutaten;
 
 	/**
 	* Key: Verzierungszutatenname, Value: Anzahl Einheiten benoetigt fuer
 	* Basisanzahl
 	* von Keksen
 	*/
-	map <string, zutat> * verzierungen;
+	map <string, zutat>  verzierungen;
 	/** Name fuer Teig */
 	string  tgName;
 	/** Kantenlaenge x fuer Rechteck in das die Form eingepasst wird */
@@ -29,7 +29,6 @@ private:
 	double basisAnzahlPlaetzchen;
 	/** form der Plaetzchen*/
 	string plaetzchenForm;
-
 	/** Kantenlaenge y fuer Rechteck in das die Form eingepasst wird */
 	double yBetrag;
 	/** Die Temperatur für backen in °C*/
@@ -67,13 +66,55 @@ public:
 	* und gibt den String fuer die Konfigurationsdatei zurueck
 	* @param totalAnzahlKekse Anzahl der Kekse, die gebacken werden sollen
 	*/
+
 	string getKonfigdatei(int  totalAnzahlKekse);
+	/**
+	* lese die Menge der Zutaten ab
+	* @param map zutaten, der die menge beeinhaltet
+	*/
+	map<string,zutat> & geMaptZutatMenge();
+	/**
+	* lese die Menge der Zutaten ab
+	* @param map verzeirungen, die die menge beeinhaltet
+	*/
+	map<string, zutat> getVerzierungsMenge();
+
+	/**
+	* Gibt Name der Teigsorte zurück 
+	* return Name
+	*/
 	string getTeigName();
+	/**
+	*Gibt Basis Anzahl der Plaetzchen 
+	*
+	*/
 	double getBasisPlaetzchenAnzahl();
+	/**
+	*Gibt Form der Plaetzechen zurück
+	*
+	*/
 	string getForm();
+	/**
+	*Gibt die Breite  der Plaetzchen zurück
+	*
+	*/
 	double getXBetrag();
+	/**
+	*Gibt Höhe der Plaetzchen zurück
+	*
+	*/
 	double getYBetrag();
+	/**
+	*Gibt die Backtemperatur zurück
+	*
+	*/
 	double getBackTemperatur();
+	/**
+	*Gibt die Backzeit zurück
+	*
+	*/
 	double getBackZeit();
 
+	rezept();
+	~rezept();
 };

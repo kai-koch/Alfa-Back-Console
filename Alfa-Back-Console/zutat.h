@@ -25,5 +25,6 @@ public:
 	string getMasseinheit();
 	/** Setter Menge */
 	void setMenge(double ztMenge);
-
+	zutat();
+	~zutat();
 };

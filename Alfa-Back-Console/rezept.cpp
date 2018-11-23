@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "rezept.h"
+using namespace std;
 
 rezept::rezept(string teigName, double plaetzchenAnzahl, string form, double xGroesse, double yGroesse, double backTemperatur, double backZeit)
 {
@@ -15,18 +16,31 @@ rezept::rezept(string teigName, double plaetzchenAnzahl, string form, double xGr
 void rezept::addZutat(zutat  ingredient)
 {
 
-	zutaten->insert(pair<string, zutat>(ingredient.getName(), ingredient));
+	zutaten.insert(pair<string, zutat>(ingredient.getName(), ingredient));
 }
 
 void rezept::addVerzierung(zutat ingredient)
 {
-	verzierungen->insert(pair<string, zutat>(ingredient.getName(), ingredient));
+	verzierungen.insert(pair<string, zutat>(ingredient.getName(), ingredient));
 }
 
 string rezept::getKonfigdatei(int totalAnzahlKekse)
 {
 	double rezeptfactor = totalAnzahlKekse / basisAnzahlPlaetzchen;
 	return "";
+}
+
+map<string, zutat>& rezept::geMaptZutatMenge()
+{
+	return  zutaten;
+}
+
+
+
+
+map<string, zutat> rezept::getVerzierungsMenge()
+{
+	return verzierungen;
 }
 
 string rezept::getTeigName()
@@ -62,4 +76,12 @@ double rezept::getBackTemperatur()
 double rezept::getBackZeit()
 {
 	return backZt;
+}
+
+rezept::rezept()
+{
+}
+
+rezept::~rezept()
+{
 }

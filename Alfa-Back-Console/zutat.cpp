@@ -27,3 +27,11 @@ void zutat::setMenge(double ztMenge)
 {
 	menge = ztMenge;
 }
+
+zutat::zutat()
+{
+}
+
+zutat::~zutat()
+{
+}

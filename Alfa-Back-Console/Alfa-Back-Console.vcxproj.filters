@@ -57,6 +57,12 @@
     <ClInclude Include="zutat.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="AusnahmenUndThreadsMon.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="lagerVerwaltung.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -96,6 +102,12 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="zutat.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="AusnahmenUndThreadsMon.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="lagerVerwaltung.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

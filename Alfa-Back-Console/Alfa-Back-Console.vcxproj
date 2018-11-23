@@ -153,6 +153,7 @@
     <ClInclude Include="Band.h" />
     <ClInclude Include="BandSteuerung.h" />
     <ClInclude Include="Blech.h" />
+    <ClInclude Include="lagerVerwaltung.h" />
     <ClInclude Include="Ofen.h" />
     <ClInclude Include="OfenSteuerung.h" />
     <ClInclude Include="ParameterListe.h" />
@@ -170,6 +171,7 @@
     <ClCompile Include="Band.cpp" />
     <ClCompile Include="BandSteuerung.cpp" />
     <ClCompile Include="Blech.cpp" />
+    <ClCompile Include="lagerVerwaltung.cpp" />
     <ClCompile Include="Ofen.cpp" />
     <ClCompile Include="OfenSteuerung.cpp" />
     <ClCompile Include="ParameterListe.cpp" />
