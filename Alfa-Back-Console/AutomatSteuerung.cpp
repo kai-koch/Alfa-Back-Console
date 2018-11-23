@@ -37,6 +37,7 @@ void AutomatSteuerung::blechBelegen()
 
 void AutomatSteuerung::Backen(int Zeit)
 {
+	divider();
 
 	if (BackProzessTimerStatus == false)
 	{
@@ -100,6 +101,8 @@ void AutomatSteuerung::Backen(int Zeit)
 					else if (intStern == 4) { intStern = 5;  S.append(" - "); }
 					else if (intStern == 5) { intStern = 0;  S.append(" \\ "); }
 
+					///////////////////////////////////////////////////////////////////////
+
 					wstringstream titleStream;
 					titleStream << "Counting to " << S.c_str();
 					SetConsoleTitle(titleStream.str().c_str());
@@ -116,7 +119,7 @@ void AutomatSteuerung::Backen(int Zeit)
 							else if (i == pos) std::cout << ">";
 							else std::cout << " ";
 						}
-						std::cout << "] " << int(progress * 100.0) << " %\r";
+						std::cout << "] " << int(progress * 100.0) << " %\r"; //
 						std::cout.flush();
 
 						progress += static_cast<double>(1) / Zeit;
@@ -124,13 +127,13 @@ void AutomatSteuerung::Backen(int Zeit)
 					std::cout << std::endl;
 					//////////////////////////////////////////////////////////////////////////////////
 
-
 				//std::cout << std::endl;
 				//////////////////////////////////////////////////////////////////////////////////
 
 				BackProzessTimerBenachrichtigung.pop();
 			}
 			informiert = false;
+		
 		}
 	});
 
@@ -151,6 +154,8 @@ void AutomatSteuerung::Backen(int Zeit)
 		get_id() == std::thread::id()*/
 
 	} // If 
+
+	divider();
 
 	//return true;
 }

@@ -3,6 +3,7 @@
 #include <string>
 #include <thread>
 #include <chrono>
+#include <iomanip>
 #include <windows.h>
 using namespace std;
 
@@ -32,6 +33,13 @@ void cls()
 	pos(0, 0);
 
 	void COUTFuncIntro();
+
+}
+
+void divider()
+{
+	const auto SCREEN_WIDTH = 80;
+	cout << setfill('*') << setw(SCREEN_WIDTH) << "\n" << setfill(' ') << endl;
 
 }
 

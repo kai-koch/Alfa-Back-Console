@@ -13,6 +13,8 @@
 #include <vector>
 using namespace std;
 #include "ParameterListe.h"
+//#include "Addons.h"
+void divider();
 
 bool AusnahmenUndThreadsMon::SetAusnahmenMonitorTrueFalse(bool)
 {
@@ -28,6 +30,8 @@ bool AusnahmenUndThreadsMon::StartAusnahmenMonitor()
 	bool informiert = false;
 	bool ZusammenfassungState = true;
 
+	divider();
+
 	std::thread ExceptionsAusloeser([&]() {
 
 		while (AusnahmenMonitorStatus = true)
@@ -40,7 +44,9 @@ bool AusnahmenUndThreadsMon::StartAusnahmenMonitor()
 			if (ZusammenfassungState == false)
 			{ 
 			std::unique_lock<std::mutex> lock(Exception_mutex);
+
 			std::cout << "Ausnahme ausgeloest" << ZusammenfassungState << endl;
+
 			ErstellteExceptionMatrix.push(ZusammenfassungState);
 			informiert = true;
 			cond_Exception.notify_one();
@@ -61,6 +67,7 @@ bool AusnahmenUndThreadsMon::StartAusnahmenMonitor()
 			}
 			while (!ErstellteExceptionMatrix.empty()) {
 				std::cout << "Ausnahme wurde verwaltet" << ErstellteExceptionMatrix.front() << endl;
+
 				ErstellteExceptionMatrix.pop();
 			}
 			informiert = false;
@@ -69,6 +76,8 @@ bool AusnahmenUndThreadsMon::StartAusnahmenMonitor()
 
 	ExceptionsAusloeser.join();//
 	ExceptionsMonitor.join();//
+
+
 	return true;
 }
 
