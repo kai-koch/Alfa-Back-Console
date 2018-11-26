@@ -2,6 +2,7 @@
 #include "OfenSteuerung.h"
 #include <iostream>
 #include <string>
+#include "Ofen.h"
 using namespace std;
 
 

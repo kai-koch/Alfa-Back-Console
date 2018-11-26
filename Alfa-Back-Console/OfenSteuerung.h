@@ -1,6 +1,5 @@
 #pragma once
 #include "AutomatSteuerung.h"
-#include "Ofen.h"
 
 class OfenSteuerung : public AutomatSteuerung
 {
