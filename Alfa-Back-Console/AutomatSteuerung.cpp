@@ -17,7 +17,7 @@ using namespace std;
 #include "ParameterListe.h"
 
 
-AutomatSteuerung::AutomatSteuerung() //: Ofn{class Ofen}, Bnd{class Band}, AM{AusnahmenUndThreadsMon}, PL{ParameterListe}, OfnSu{OfenSteuerung}
+AutomatSteuerung::AutomatSteuerung()
 {
 
 /*
@@ -185,15 +185,41 @@ void AutomatSteuerung::VerweilDauerBestimmen()
 {
 }
 
-void AutomatSteuerung::InitClassen()
+
+void AutomatSteuerung::InitClassen(AutomatSteuerung * As)
 {
 
-/*
-	Ofen * Ofn = new Ofen;
-	Band * Bnd = new Band;
-	AusnahmenUndThreadsMon * AM = new AusnahmenUndThreadsMon;
-	ParameterListe * PL = new ParameterListe;
-	OfenSteuerung * OfnSu = new OfenSteuerung;*/
+	Ofen * OfenInit = new Ofen();
+	As->setOfen(OfenInit);
+
+	Band * BandInit = new Band();
+	As->setBand(BandInit);
+
+	AusnahmenUndThreadsMon * AusnahmenUndThreadsMonInit = new AusnahmenUndThreadsMon();
+	As->setAusnahmenUndThreadsMon(AusnahmenUndThreadsMonInit);
+
+	ParameterListe * ParameterListeInit = new ParameterListe();
+	As->setParameterListe(ParameterListeInit);
+
+	OfenSteuerung * OfenSteuerungInit = new OfenSteuerung();
+	As->setOfenSteuerung(OfenSteuerungInit);
+
+	AusnahmenUndThreadsMon * ATM;
+	ATM = As->getAusnahmenUndThreadsMon();
+	ATM->setAutomatSteuerungPointer(As);
+
+	OfenSteuerung * OfenSteuerung2;
+	OfenSteuerung2 = As->getOfenSteuerung();
+	OfenSteuerung2->setAutomatSteuerungPointer(As);
+
+	ParameterListe * PL2;
+	PL2 = As->getParameterListe();
+	PL2->setAutomatSteuerungPointer(As);
+
+	std::thread tw1 = ATM->StartThreadAusnahmeMonitor();
+	tw1.detach();
+	//thread PSMthread2(&AusnahmenUndThreadsMon::StartAusnahmenMonitor(), AusnahmenUndThreadsMon());
+	//PSMthread2.detach(); //AusnahmenUndThreadsMon ATM; // Thread Lock Erstellen oder aus DO verschieben
 
 }
 

@@ -39,7 +39,7 @@ public:
 	void Verzierungen();
 	void VerweilDauerBestimmen();
 
-	void InitClassen();
+	void InitClassen(AutomatSteuerung * As);
 
 	Ofen *  getOfen();
 	Band * getBand();
