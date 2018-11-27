@@ -130,6 +130,10 @@ public:
      */
 	double getBackZeit();
 
+    /**
+     * Veraltet wird entfernt.
+     */
+    rezept getKonfigdatei();
     rezept();
 	~rezept();
 };
