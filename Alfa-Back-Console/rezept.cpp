@@ -12,50 +12,41 @@ rezept::rezept(string teigName, double plaetzchenAnzahl, string form, string gro
 	backZt = backZeit;
 }
 
-void rezept::addZutat(zutat  ingredient)
+void rezept::addZutat(zutat*  ingredient)
 {
 
-	zutaten.insert(pair<string, zutat>(ingredient.getName(), ingredient));
+	zutaten.insert(pair<string, zutat*>(ingredient->getName(), ingredient));
 }
 
-void rezept::addVerzierung(zutat ingredient)
+void rezept::addVerzierung(zutat* ingredient)
 {
-	verzierungen.insert(pair<string, zutat>(ingredient.getName(), ingredient));
+	verzierungen.insert(pair<string, zutat*>(ingredient->getName(), ingredient));
 }
 
-rezept rezept::getKonfigdatei()
+rezept* rezept::getKonfigdatei()
 {
-	rezept * schokoPlaetzchen = new rezept("Schokokeks", 100.0, "Kreis", "mittel", 180.0, 40.0);
-	zutat * backpulverZutat = new zutat("Backpulver", 100.0, "g");
-	schokoPlaetzchen->addZutat(*backpulverZutat);
-	zutat * eierZutat = new zutat("Eier", 0.9, "l");
-	schokoPlaetzchen->addZutat(*eierZutat);
-	zutat * kakoZutat = new zutat("Kakao", 700.0, "g");
-	schokoPlaetzchen->addZutat(*kakoZutat);
-	zutat * mehlZutat = new zutat("Mehl", 900.0, "g");
-	schokoPlaetzchen->addZutat(*mehlZutat);
-	zutat * milchZutat = new zutat("Milch", 4.0, "l");
-	schokoPlaetzchen->addZutat(*milchZutat);
-	zutat * pflanzenfettZutat = new zutat("Pflanzenfett", 500.0, "g");
-	schokoPlaetzchen->addZutat(*pflanzenfettZutat);
-	zutat * zuckerZutat = new zutat("Zucker", 1000.0, "g");
-	schokoPlaetzchen->addZutat(*zuckerZutat);
-	zutat * kakaogussVerzierung = new zutat("Kakaoguss", 0.3, "l");
-	schokoPlaetzchen->addVerzierung(*kakaogussVerzierung);
-	zutat * schokostreuselVerzierung = new zutat("Schokostreusel", 300.0, "g");
-	schokoPlaetzchen->addVerzierung(*schokostreuselVerzierung);
-	return *schokoPlaetzchen;
+	rezept* schokoPlaetzchen = new rezept("Schokokeks", 100.0, "Kreis", "mittel", 180.0, 40.0);
+	schokoPlaetzchen->addZutat(new zutat("Backpulver", 100.0, "g"));
+	schokoPlaetzchen->addZutat(new zutat("Eier", 0.9, "l"));
+	schokoPlaetzchen->addZutat(new zutat("Kakao", 700.0, "g"));
+	schokoPlaetzchen->addZutat(new zutat("Mehl", 900.0, "g"));
+	schokoPlaetzchen->addZutat(new zutat("Milch", 4.0, "l"));
+	schokoPlaetzchen->addZutat(new zutat("Pflanzenfett", 500.0, "g"));
+	schokoPlaetzchen->addZutat(new zutat("Zucker", 1000.0, "g"));
+	schokoPlaetzchen->addVerzierung(new zutat("Kakaoguss", 0.3, "l"));
+	schokoPlaetzchen->addVerzierung(new zutat("Schokostreusel", 300.0, "g"));
+	return schokoPlaetzchen;
 }
 
-map<string, zutat> rezept::geMaptZutatMenge()
+map<string, zutat*> rezept::getZutatMenge()
 {
-	return  zutaten;
+	return zutaten;
 }
 
 
 
 
-map<string, zutat> rezept::getVerzierungsMenge()
+map<string, zutat*> rezept::getVerzierungsMenge()
 {
 	return verzierungen;
 }
@@ -82,8 +73,6 @@ string rezept::getForm()
 
 double rezept::getXBetrag( string groesse)
 {
-	
-	
 	if (groesse == "gross")
 	{ 
 		return 80;
@@ -96,9 +85,6 @@ double rezept::getXBetrag( string groesse)
 	{
 		return 20;
 	}
-	
-	
-	
 }
 
 double rezept::getYBetrag(string groesse)
@@ -126,12 +112,6 @@ double rezept::getBackZeit()
 {
 	return backZt;
 }
-/*
-double rezept::plaetzchenGroesse(string groesse)
-{
-	return (getYBetrag(groesse)*getXBetrag(groesse));
-}
-*/
 
 rezept::rezept()
 {

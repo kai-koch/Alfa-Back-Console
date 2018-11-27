@@ -15,18 +15,21 @@ private:
 	* Key: Zutatenname, Value: Instanz der Klasse Zutat fuer Basisanzahl
 	* von Keksen
 	*/
-	map <string, zutat >  zutaten;
+	map <string, zutat*>  zutaten;
 
 	/**
 	* Key: Verzierungszutatenname, Value: Anzahl Einheiten benoetigt fuer
 	* Basisanzahl
 	* von Keksen
 	*/
-	map <string, zutat>  verzierungen;
+	map <string, zutat*>  verzierungen;
+
 	/** Name fuer Teig */
-	string  tgName;
+	string tgName;
+
 	/** Kantenlaenge x fuer Rechteck in das die Form eingepasst wird */
 	double xBetrag;
+
 	/**Anzahl der Plaetzchen*/
 	double basisAnzahlPlaetzchen;
 
@@ -63,7 +66,7 @@ public:
 	 * @param name Name der Zutat
 	 * @param einheiten Anzahl der Einheiten, die fuer Rezept benoetigt werden
 	 */
-	void addZutat(zutat ingredient);
+	void addZutat(zutat* ingredient);
 
 	/**
 	 * Fuegt eine Verzierungszutat mit Mengenangabe zur Verzierungszutatenliste
@@ -71,19 +74,19 @@ public:
 	 * @param name Name der Zutat
 	 * @param einheiten Anzahl der Einheiten, die fuer Rezept benoetigt werden
      */
-	void addVerzierung(zutat ingredient);
+	void addVerzierung(zutat* ingredient);
 
 	/**
 	 * lese die Menge der Zutaten ab
 	 * @param map zutaten, der die menge beeinhaltet
 	 */
-	map<string,zutat>  geMaptZutatMenge();
+	map<string,zutat*>  getZutatMenge();
 
 	/**
 	 * lese die Menge der Zutaten ab
 	 * @param map verzeirungen, die die menge beeinhaltet
 	 */
-	map<string, zutat> getVerzierungsMenge();
+	map<string, zutat*> getVerzierungsMenge();
 
 	/**
 	* Gibt Name der Teigsorte zurück 
@@ -133,7 +136,7 @@ public:
     /**
      * Veraltet wird entfernt.
      */
-    rezept getKonfigdatei();
+    rezept* getKonfigdatei();
 
     rezept();
 	~rezept();
