@@ -20,7 +20,7 @@ private:
 										{"Kakao",{ "Kakao", 10000, "g" }}
 	};
 	// eine map zur Lagerhaltung von Verzierungen mit Initialisierungswerte
-	map<string, zutat> lagerBestandVezgen = { { "Kakaoguss",{"Kakaoguss", 100, "l" }},
+	map<string, zutat> lagerBestandVezgen =			{ { "Kakaoguss",{"Kakaoguss", 100, "l" }},
 													{ "Schokostreusel",{ "Schokostreusel", 10000, "g" } },
 													{ "Zuckerstreusel(bunt)",{ "Zuckerstreusel(bunt)", 10000, "g" } },
 													{ "Zitronenguss",{ "Zitronenguss", 100, "l" } },
@@ -57,5 +57,6 @@ public:
 	*Constructor
 	*mit zwei maps zur Lagerverawltung lagerBestandZutaten und lagerBestandVerzierungen
 	*/
-	lagerVerwaltung(map<string, zutat> lagerBestandZutaten, map<string, zutat> lagerBestandVerzierungen);
+	//lagerVerwaltung(map<string, zutat> lagerBestandZutaten, map<string, zutat> lagerBestandVerzierungen);
+	lagerVerwaltung();
 };
