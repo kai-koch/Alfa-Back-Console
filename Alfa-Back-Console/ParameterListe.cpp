@@ -234,7 +234,7 @@ int ParameterListe::TryCatchLoop(string ExceptMessageS, string CoutMessages, int
 		}
 
 	}
-	catch (int e)
+	catch (int e) //e -ErrorNumber
 	{
 		//cout << ExceptMessageS << e << endl << endl;
 	}
