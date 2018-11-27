@@ -1,12 +1,14 @@
 #pragma once
 #include "AutomatSteuerung.h"
+#include "rezept.h"
 
 class Blech : public AutomatSteuerung
 {
-	double Groesse;
+ const	double xGroesse=400;
+ const	double yGroesse = 600;
+ 
 public:
-	void GetGroessse();
-	Blech();
-	~Blech();
+	int getBlechAnzahl(double plaetzchenXGroesse,double plaetzchen);
+	
 };
 

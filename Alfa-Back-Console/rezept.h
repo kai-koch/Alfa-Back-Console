@@ -9,6 +9,8 @@ using namespace std;
 class rezept
 {
 private:
+	
+	
 	/**
 	* Key: Zutatenname, Value: Instanz der Klasse Zutat fuer Basisanzahl
 	* von Keksen
@@ -35,6 +37,8 @@ private:
 	double backTemp;
 	/** Die Backzeit in Minuten*/
 	double backZt;
+	/** plaetzchen Groesse: gross, mittel, klein*/
+	string plaetzchenGroesse;
 public:
 	/**
 	* Properties der Klasse setzen
@@ -47,7 +51,7 @@ public:
 	* @param backTemperatur Backtemperatur
 	* @param backZeit Backzeit
 	*/
-	rezept(string teigName, double pleatzchenAnzahl, string form, double xGroesse, double yGroesse, double backTemperatur, double backZeit);
+	rezept(string teigName, double pleatzchenAnzahl, string form, string groesse, double backTemperatur, double backZeit);
 	/**
 	* Fuegt eine Zutat mit Mengenangabe zur Zutatenliste hinzu
 	* @param name Name der Zutat
@@ -67,12 +71,12 @@ public:
 	* @param totalAnzahlKekse Anzahl der Kekse, die gebacken werden sollen
 	*/
 
-	string getKonfigdatei(int  totalAnzahlKekse);
+	rezept getKonfigdatei();
 	/**
 	* lese die Menge der Zutaten ab
 	* @param map zutaten, der die menge beeinhaltet
 	*/
-	map<string,zutat> & geMaptZutatMenge();
+	map<string,zutat>  geMaptZutatMenge();
 	/**
 	* lese die Menge der Zutaten ab
 	* @param map verzeirungen, die die menge beeinhaltet
@@ -90,6 +94,10 @@ public:
 	*/
 	double getBasisPlaetzchenAnzahl();
 	/**
+	* Gibt die Groesse der Plaetzchen in string
+	*/
+	string getPlaetzchenGroesse();
+	/**
 	*Gibt Form der Plaetzechen zurück
 	*
 	*/
@@ -98,14 +106,16 @@ public:
 	*Gibt die Breite  der Plaetzchen zurück
 	*
 	*/
-	double getXBetrag();
+	double getXBetrag(string groesse);
 	/**
-	*Gibt Höhe der Plaetzchen zurück
+	*@parameter groess: Gross, mittel oder Klein
+	*Gibt Höhe der Plaetzchen in abheangigkeit der Groesse zurück
 	*
 	*/
-	double getYBetrag();
+	double getYBetrag(string groesse);
 	/**
-	*Gibt die Backtemperatur zurück
+	*@parameter groess: Gross, mittel oder Klein
+	*Gibt die Backtemperatur in abheangigkeit der Groesse zurück
 	*
 	*/
 	double getBackTemperatur();
@@ -114,7 +124,9 @@ public:
 	*
 	*/
 	double getBackZeit();
-
+	/**
+	*/
+	//double plaetzchenGroesse(string groesse);
 	rezept();
 	~rezept();
 };
