@@ -2,7 +2,7 @@
 #include "OfenSteuerung.h"
 
 
-class Ofen //: public OfenSteuerung
+class Ofen : public OfenSteuerung
 {
 private:
 	double Temperatur = 0;

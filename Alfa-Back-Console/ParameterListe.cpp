@@ -16,6 +16,7 @@
 #include <string>
 using namespace std;
 
+
 ParameterListe::ParameterListe()
 {
 }
@@ -23,6 +24,11 @@ ParameterListe::ParameterListe()
 
 ParameterListe::~ParameterListe()
 {
+}
+
+void ParameterListe::setAutomatSteuerungPointer(AutomatSteuerung * ASPM)
+{
+	AutomatSteuerungParameterListe = ASPM;
 }
 
 bool ParameterListe::ZutatenPruefen()
@@ -73,59 +79,64 @@ bool ParameterListe::ZusammenfassungFunc()
 	size_t HashGruensize_t;
 	string HashGruen;
 
+	ParameterListe* PL1;
+	PL1 = AutomatSteuerungParameterListe->getParameterListe();
+
+/* 
 	Param sParam1;
-	Param *Param_1;
-	ParamA sParam2;
+	//Param *Param_1;
+	ParamA sParam2;*/
 
 	HashGruensize_t = std::hash<std::vector<bool>>()(VectroBool);
 	HashGruen = std::to_string(HashGruensize_t);
 
-	HashGruenSave = HashGruensize_t;
+	PL1->HashGruenSave = HashGruensize_t;
+
 
 	// exceptions
-	TryCatchLoop("An exception occurred. Exception ZutatenBool - ", "ZutatenBool", Zutaten, &sParam1.ZutatenBool, VectroBool);
+	TryCatchLoop("An exception occurred. Exception ZutatenBool - ", "ZutatenBool", Zutaten, PL1->my_Param.ZutatenBool, VectroBool);
 	// exceptions
-	TryCatchLoop("An exception occurred. Exception VerzierungBool - ", "VerzierungBool", Verzierung, &sParam1.VerzierungBool, VectroBool);
+	TryCatchLoop("An exception occurred. Exception VerzierungBool - ", "VerzierungBool", Verzierung, PL1->my_Param.VerzierungBool, VectroBool);
 	// exceptions
-	TryCatchLoop("An exception occurred. Exception TeigBool  - ", "TeigBool", Teig, &sParam1.TeigBool, VectroBool);
+	TryCatchLoop("An exception occurred. Exception TeigBool  - ", "TeigBool", Teig, PL1->my_Param.TeigBool, VectroBool);
 	// exceptions
-	TryCatchLoop("An exception occurred. Exception FormBool  - ", "FormBool", Form, &sParam1.FormBool, VectroBool);
+	TryCatchLoop("An exception occurred. Exception FormBool  - ", "FormBool", Form, PL1->my_Param.FormBool, VectroBool);
 	// exceptions
-	TryCatchLoop("An exception occurred. Exception TeigGroesseBool - ", "TeigGroesseBool", TeigGroesse, &sParam1.TeigGroesseBool, VectroBool);
+	TryCatchLoop("An exception occurred. Exception TeigGroesseBool - ", "TeigGroesseBool", TeigGroesse, PL1->my_Param.TeigGroesseBool, VectroBool);
 	// exceptions
-	TryCatchLoop("An exception occurred. Exception TeigSorteBool - ", "TeigSorteBool", TeigSorte, &sParam1.TeigSorteBool, VectroBool);
+	TryCatchLoop("An exception occurred. Exception TeigSorteBool - ", "TeigSorteBool", TeigSorte, PL1->my_Param.TeigSorteBool, VectroBool);
 	// exceptions
-	TryCatchLoop("An exception occurred. Exception ConfigFileBool - ", "ConfigFileBool", ConfigFile, &sParam1.ConfigFileBool, VectroBool);
+	TryCatchLoop("An exception occurred. Exception ConfigFileBool - ", "ConfigFileBool", ConfigFile, PL1->my_Param.ConfigFileBool, VectroBool);
 	// exceptions
-	TryCatchLoop("An exception occurred. Exception BlechAusFuellungBool - ", "BlechAusFuellungBool", BlechAusFuellung, &sParam1.BlechAusFuellungBool, VectroBool);
+	TryCatchLoop("An exception occurred. Exception BlechAusFuellungBool - ", "BlechAusFuellungBool", BlechAusFuellung, PL1->my_Param.BlechAusFuellungBool, VectroBool);
 
 	//Pruefe BOOL Vector fuer ZusammenfassungBool
 
 	Hashret = std::hash<std::vector<bool>>()(VectroBool);
 
-	//std::cout << endl << "Exception Matrix Hash is : " << Hashret << endl;
+	//std::cout << endl << "Exception Matrix Hashret is : " << Hashret << endl;
 	//std::cout << "HashGruen is : " << HashGruen << endl;
 	string Hash_str = std::to_string(Hashret);
 
-	if (HashretSave != Hashret) // keine Status-Veraenderung 
+	if ((PL1->HashretSave) != Hashret) // keine Status-Veraenderung 
 	{
-		cout << "HashretSave -  " << HashretSave << endl;
+		cout << "HashretSave -  " << PL1->HashretSave << endl;
 		cout << "Hash_str -  " << Hashret << endl;
-		HashretSave = Hashret;
+		PL1->HashretSave = Hashret;
 	//cout << "Exception Matrix Hash_str -  " << Hash_str << endl;
 
 	if (HashGruen.compare(Hash_str) != 0)
 	{
 		std::cout << HashGruen << "- HashGruen is not Exception Matrix Hash : " << Hash_str << endl;
-		sParam2.ZusammenfassungBool = false;
+		PL1->my_Param2.ZusammenfassungBool = false;
 	}
 
 	// exceptions
-	int ITERatorLoopRetStatus = TryCatchLoop("Exception Matrix erstellt - mehrere Ausnahmen sind aufgetreten - ", "ZusammenfassungBool", (-1), &sParam2.ZusammenfassungBool, VectroBool, ITERator );
+	int ITERatorLoopRetStatus = TryCatchLoop("Exception Matrix erstellt - mehrere Ausnahmen sind aufgetreten - ", "ZusammenfassungBool", (-1), PL1->my_Param2.ZusammenfassungBool, VectroBool, ITERator );
 
 	}
 
-	return sParam2.ZusammenfassungBool;
+	return PL1->my_Param2.ZusammenfassungBool;
 	
 
 }
@@ -200,15 +211,17 @@ int ParameterListe::SetZusammenfassungFuncTrueFalse(bool TrueFalse)
 	return 0;
 }
 
-int ParameterListe::TryCatchLoop(string ExceptMessageS, string CoutMessages, int ErrorNumber, bool * FlagTest, vector<bool>& VectorBoolPL)
+
+
+int ParameterListe::TryCatchLoop(string ExceptMessageS, string CoutMessages, int ErrorNumber, bool FlagTest, vector<bool>& VectorBoolPL)
 {
 	try
 	{
 		bool i = true;
 		int n = 0;
-		i = *FlagTest;
+		i = FlagTest;
 
-		//std::cout << "*FlagTest : " << *FlagTest << endl;
+		//std::cout << "*FlagTest : " << FlagTest << endl;
 
 		if (i == false)
 		{
@@ -228,13 +241,13 @@ int ParameterListe::TryCatchLoop(string ExceptMessageS, string CoutMessages, int
 
 }
 
-int ParameterListe::TryCatchLoop(string ExceptMessageS, string CoutMessages, int ErrorNumber, bool * FlagTest, vector<bool>& VectorBoolPL, vector<bool>::iterator ITERator )
+int ParameterListe::TryCatchLoop(string ExceptMessageS, string CoutMessages, int ErrorNumber, bool FlagTest, vector<bool>& VectorBoolPL, vector<bool>::iterator ITERator )
 {
 	try
 	{
 		bool i = true;
 		int n = 0;
-		i = *FlagTest;
+		i = FlagTest;
 
 		if (i == false)
 		{

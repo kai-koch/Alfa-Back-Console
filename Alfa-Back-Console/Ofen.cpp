@@ -19,7 +19,7 @@ void Ofen::setTemperatur(int TemperaturIN)
 	cout << "Ofen::setTemperatur(int Temperatur) - " << Temperatur << endl;
 }
 
-Ofen::Ofen()
+Ofen::Ofen() : Temperatur{ 0 }
 {
 }
 

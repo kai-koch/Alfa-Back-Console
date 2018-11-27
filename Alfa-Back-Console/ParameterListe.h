@@ -23,6 +23,10 @@ using namespace std;
 
 class ParameterListe : public AutomatSteuerung // Status 3
 {
+
+	AutomatSteuerung * AutomatSteuerungParameterListe;
+
+/*
 	struct Param
 	{
 		bool ZutatenBool = false;
@@ -53,11 +57,48 @@ class ParameterListe : public AutomatSteuerung // Status 3
 	{
 		bool ZusammenfassungBool;
 	};
+	ParamA my_Param2;*/
+
+public:
+
+	struct Param
+	{
+		bool ZutatenBool = false;
+		bool VerzierungBool = true;
+		bool TeigBool = true;
+		bool FormBool = false;
+		bool TeigGroesseBool = false;
+		bool TeigSorteBool = true;
+		bool ConfigFileBool = false;
+		bool BlechAusFuellungBool = true;
+	};
+	Param my_Param;
+
+	enum Errors
+	{
+		Zutaten,
+		Verzierung,
+		Teig,
+		Form,
+		TeigGroesse,
+		TeigSorte,
+		ConfigFile,
+		BlechAusFuellung,
+		MaxEnumErrorSIZE
+	};
+
+	struct ParamA
+	{
+		bool ZusammenfassungBool;
+	};
+	ParamA my_Param2;
+
 
 	size_t HashretSave;
 	size_t HashGruenSave;
 
-public:
+	void setAutomatSteuerungPointer(AutomatSteuerung *  ASPM);
+
 	bool ZutatenPruefen();
 	bool VerzierungPruefen();
 	bool TeigPruefen();
@@ -79,8 +120,12 @@ public:
 	int SetTeigSorteTrueFalse(bool);
 	int SetZusammenfassungFuncTrueFalse(bool);
 
-	int TryCatchLoop(string MessageS, string CoutMessages, int ErrorNumber, bool * FlagTest, vector<bool>& VectroBool);
-	int TryCatchLoop(string MessageS, string CoutMessages, int ErrorNumber, bool * FlagTest, vector<bool>& VectroBool, vector<bool>::iterator ITERator);
+	//Param * getsParam1();
+	//ParamA * getsParam2();
+
+
+	int TryCatchLoop(string MessageS, string CoutMessages, int ErrorNumber, bool FlagTest, vector<bool>& VectroBool);
+	int TryCatchLoop(string MessageS, string CoutMessages, int ErrorNumber, bool FlagTest, vector<bool>& VectroBool, vector<bool>::iterator ITERator);
 
 	ParameterListe();
 	~ParameterListe();

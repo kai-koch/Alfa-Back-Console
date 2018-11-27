@@ -12,15 +12,27 @@
 using namespace std;
 #include "addons.h"
 #include "Band.h"
+#include "Ofen.h"
+#include "AusnahmenUndThreadsMon.h"
+#include "ParameterListe.h"
 
-AutomatSteuerung::AutomatSteuerung()
+
+AutomatSteuerung::AutomatSteuerung() //: Ofn{class Ofen}, Bnd{class Band}, AM{AusnahmenUndThreadsMon}, PL{ParameterListe}, OfnSu{OfenSteuerung}
 {
+
+/*
+	Ofn = new Ofen();
+	Bnd = new Band();
+	AM = new AusnahmenUndThreadsMon();
+	PL = new ParameterListe();
+	OfnSu = new OfenSteuerung();*/
 
 }
 
 
 AutomatSteuerung::~AutomatSteuerung()
 {
+
 }
 
 void AutomatSteuerung::plaetzchenAnzahlErmitteln()
@@ -68,8 +80,9 @@ void AutomatSteuerung::Backen(int Zeit)
 			cond_Backen.notify_one();
 		}
 
-		Band Bnd;
-		Bnd.setGeschwindigkeit(0);
+
+		Bnd->setGeschwindigkeit(0);
+
 
 		cls();
 
@@ -170,4 +183,66 @@ void AutomatSteuerung::Verzierungen()
 
 void AutomatSteuerung::VerweilDauerBestimmen()
 {
+}
+
+void AutomatSteuerung::InitClassen()
+{
+
+/*
+	Ofen * Ofn = new Ofen;
+	Band * Bnd = new Band;
+	AusnahmenUndThreadsMon * AM = new AusnahmenUndThreadsMon;
+	ParameterListe * PL = new ParameterListe;
+	OfenSteuerung * OfnSu = new OfenSteuerung;*/
+
+}
+
+Ofen * AutomatSteuerung::getOfen()
+{
+	return Ofn;
+}
+
+Band * AutomatSteuerung::getBand()
+{
+	return Bnd;
+}
+
+AusnahmenUndThreadsMon * AutomatSteuerung::getAusnahmenUndThreadsMon()
+{
+	return AM;
+}
+
+ParameterListe * AutomatSteuerung::getParameterListe()
+{
+	return PL;
+}
+
+OfenSteuerung * AutomatSteuerung::getOfenSteuerung()
+{
+	return OfnSu;
+}
+
+void AutomatSteuerung::setOfen(Ofen * Ofn1)
+{
+	Ofn = Ofn1;
+}
+
+void AutomatSteuerung::setBand(Band * Bnd1)
+{
+	Bnd = Bnd1;
+}
+
+void AutomatSteuerung::setAusnahmenUndThreadsMon(AusnahmenUndThreadsMon * ATM1)
+{
+	AM = ATM1;
+}
+
+void AutomatSteuerung::setParameterListe(ParameterListe * PL1)
+{
+	PL = PL1;
+}
+
+void AutomatSteuerung::setOfenSteuerung(OfenSteuerung * setOfSteu1)
+{
+	OfnSu = setOfSteu1;
 }
