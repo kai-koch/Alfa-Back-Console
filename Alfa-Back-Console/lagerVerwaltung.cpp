@@ -2,17 +2,7 @@
 #include "lagerVerwaltung.h"
 #include <iostream>
 using namespace std;
-/*
-void lagerVerwaltung::setEingangwareVerzierungen(map<string, zutat>::iterator it, double menge)
-{
-	lagerBestandVerzierungen.insert(map<string,double menge>)
-	//it->second.setMenge(menge);
-}
 
-void lagerVerwaltung::setEinganswareZutaten(map<string, zutat>::iterator it, double menge)
-{
-}
-*/
 lagerVerwaltung::lagerVerwaltung(map<string, zutat> lagerBestandZutaten, map<string, zutat> lagerBestandVerzierungen)
 {
 	lagerBestandZt=lagerBestandZutaten;
