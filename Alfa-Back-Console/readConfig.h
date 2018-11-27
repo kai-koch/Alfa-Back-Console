@@ -13,8 +13,9 @@ private:
 public:
     readConfig();
     /**
-     * 
+     * Versucht Filename einzulesen
+     * @Returns rezept
      */
-    static rezept readRezept(string filename);
+//    static rezept readRezept(string filename);
     ~readConfig();
 };
