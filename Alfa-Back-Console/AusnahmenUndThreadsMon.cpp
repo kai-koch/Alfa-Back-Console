@@ -16,6 +16,13 @@ using namespace std;
 //#include "Addons.h"
 void divider();
 
+void AusnahmenUndThreadsMon::setAutomatSteuerungPointer(AutomatSteuerung * ASATM)
+{
+	//std::cout << "void AusnahmenUndThreadsMon::setAutomatSteuerungPointer(AutomatSteuerung * ASATM)" << endl;
+	AutomatSteuerungAusnahmenUndThreadsMo = ASATM;
+
+}
+
 bool AusnahmenUndThreadsMon::SetAusnahmenMonitorTrueFalse(bool)
 {
 	return false;
@@ -38,14 +45,17 @@ bool AusnahmenUndThreadsMon::StartAusnahmenMonitor()
 		{
 			std::this_thread::sleep_for(std::chrono::seconds(1));
 
+
 			//if Test Matrix Condition
-			ParameterListe PL;
-			ZusammenfassungState = PL.ZusammenfassungFunc();
-			if (ZusammenfassungState == false)
+			ParameterListe * PL;
+			PL = AutomatSteuerungAusnahmenUndThreadsMo->getParameterListe();
+			ZusammenfassungState = PL->ZusammenfassungFunc();
+
+			if (ZusammenfassungState == false) //Richtig
 			{ 
 			std::unique_lock<std::mutex> lock(Exception_mutex);
 
-			std::cout << "Ausnahme ausgeloest" << ZusammenfassungState << endl;
+			//std::cout << "Ausnahme ausgeloest" << ZusammenfassungState << endl;
 
 			ErstellteExceptionMatrix.push(ZusammenfassungState);
 			informiert = true;
@@ -54,7 +64,7 @@ bool AusnahmenUndThreadsMon::StartAusnahmenMonitor()
 			//if Test Matrix Condition
 		}
 
-		gemacht = true;
+		//gemacht = true;
 		informiert = true;
 		cond_Exception.notify_one();
 	});
@@ -66,9 +76,9 @@ bool AusnahmenUndThreadsMon::StartAusnahmenMonitor()
 				cond_Exception.wait(lock);
 			}
 			while (!ErstellteExceptionMatrix.empty()) {
-				std::cout << "Ausnahme wurde verwaltet" << ErstellteExceptionMatrix.front() << endl;
+				//std::cout << "Ausnahme wurde verwaltet" << ErstellteExceptionMatrix.front() << endl;
 
-				divider();
+				//divider();
 				ErstellteExceptionMatrix.pop();
 			}
 			informiert = false;
@@ -81,6 +91,13 @@ bool AusnahmenUndThreadsMon::StartAusnahmenMonitor()
 
 	return true;
 }
+
+std::thread AusnahmenUndThreadsMon::StartThreadAusnahmeMonitor()
+{
+	return std::thread([=] { StartAusnahmenMonitor(); });
+}
+
+
 
 
 AusnahmenUndThreadsMon::AusnahmenUndThreadsMon()

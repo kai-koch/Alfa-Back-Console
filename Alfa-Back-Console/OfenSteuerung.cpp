@@ -1,10 +1,17 @@
 #include "stdafx.h"
 #include "OfenSteuerung.h"
+#include "Ofen.h"
 #include <iostream>
 #include <string>
-#include "Ofen.h"
 using namespace std;
 
+
+void OfenSteuerung::setAutomatSteuerungPointer(AutomatSteuerung * ASATM)
+{
+
+	AutomatSteuerungOfenSteuerung = ASATM;
+
+}
 
 void OfenSteuerung::OfenAufheizen()
 {
@@ -13,9 +20,9 @@ void OfenSteuerung::OfenAufheizen()
 bool OfenSteuerung::OfenTemperaturStatus()
 {
 	double Temperat;
-
-	Ofen Ofn;
-	Temperat = Ofn.getTemperatur();
+	Ofen * Ofen1;
+	Ofen1 = AutomatSteuerungOfenSteuerung->getOfen();
+	Temperat = Ofen1->getTemperatur();
 	cout << "bool OfenSteuerung::OfenTemperaturStatus()" << Temperat << endl;
 	if (Temperat == 0)
 	{

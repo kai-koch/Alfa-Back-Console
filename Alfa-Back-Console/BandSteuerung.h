@@ -1,5 +1,7 @@
 #pragma once
 #include "AutomatSteuerung.h"
+
+
 class BandSteuerung : public AutomatSteuerung
 {
 

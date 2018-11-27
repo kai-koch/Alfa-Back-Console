@@ -25,7 +25,7 @@ bool Band::GetGeschwindigkeitStatus()
 	return true;
 }
 
-Band::Band()
+Band::Band() : Geschwindigkeit {0}
 {
 }
 
