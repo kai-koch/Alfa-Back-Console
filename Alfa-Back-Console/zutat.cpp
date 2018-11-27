@@ -1,6 +1,8 @@
 #include"stdafx.h"
 #include "zutat.h"
 
+using namespace std;
+
 zutat::zutat(string zutatName, double zutatMenge, string zutatEinheit)
 {
 	name = zutatName;
@@ -28,10 +30,19 @@ void zutat::setMenge(double ztMenge)
 	menge = ztMenge;
 }
 
-zutat::zutat()
+string zutat::toString()
 {
+    return string( name + "," + std::to_string(menge) + "," + masseinheit);
 }
 
-zutat::~zutat()
+void zutat::consoleWrite()
 {
+    cout << toString();
 }
+
+void zutat::consoleWriteLine()
+{
+    cout << toString() << endl;
+}
+
+zutat::~zutat() {}
