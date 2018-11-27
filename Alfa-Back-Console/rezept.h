@@ -29,104 +29,107 @@ private:
 	double xBetrag;
 	/**Anzahl der Plaetzchen*/
 	double basisAnzahlPlaetzchen;
+
 	/** form der Plaetzchen*/
 	string plaetzchenForm;
+
 	/** Kantenlaenge y fuer Rechteck in das die Form eingepasst wird */
 	double yBetrag;
+
 	/** Die Temperatur für backen in °C*/
 	double backTemp;
+
 	/** Die Backzeit in Minuten*/
 	double backZt;
+
 	/** plaetzchen Groesse: gross, mittel, klein*/
 	string plaetzchenGroesse;
 public:
 	/**
-	* Properties der Klasse setzen
-	* @construktor
-	* @param teigName Teigname
-	* @param pleatzchenAnzahl Anzahl an Keksen die beim Grundrezept gestanzt werden koennen
-	* @param form Form des Plaetzchens
-	* @param xGroesse Kantenlaenge x
-	* @param yGroesse Kantenlaenge Y
-	* @param backTemperatur Backtemperatur
-	* @param backZeit Backzeit
-	*/
+	 * Properties der Klasse setzen
+	 * @construktor
+	 * @param teigName Teigname
+	 * @param pleatzchenAnzahl Anzahl an Keksen die beim Grundrezept gestanzt werden koennen
+	 * @param form Form des Plaetzchens
+	 * @param xGroesse Kantenlaenge x
+	 * @param yGroesse Kantenlaenge Y
+	 * @param backTemperatur Backtemperatur
+	 * @param backZeit Backzeit
+	 */
 	rezept(string teigName, double pleatzchenAnzahl, string form, string groesse, double backTemperatur, double backZeit);
-	/**
-	* Fuegt eine Zutat mit Mengenangabe zur Zutatenliste hinzu
-	* @param name Name der Zutat
-	* @param einheiten Anzahl der Einheiten, die fuer Rezept benoetigt werden
-	*/
-	void addZutat(zutat ingredient);
-	/**
-	* Fuegt eine Verzierungszutat mit Mengenangabe zur Verzierungszutatenliste
-	* hinzu
-	* @param name Name der Zutat
-	* @param einheiten Anzahl der Einheiten, die fuer Rezept benoetigt werden
-	*/
-	void addVerzierung(zutat ingredient);
-	/**
-	* Berechnet die Zutatenmenge fuer die Menge an gewuenschten Keksen
-	* und gibt den String fuer die Konfigurationsdatei zurueck
-	* @param totalAnzahlKekse Anzahl der Kekse, die gebacken werden sollen
-	*/
 
-	rezept getKonfigdatei();
 	/**
-	* lese die Menge der Zutaten ab
-	* @param map zutaten, der die menge beeinhaltet
-	*/
+	 * Fuegt eine Zutat mit Mengenangabe zur Zutatenliste hinzu
+	 * @param name Name der Zutat
+	 * @param einheiten Anzahl der Einheiten, die fuer Rezept benoetigt werden
+	 */
+	void addZutat(zutat ingredient);
+
+	/**
+	 * Fuegt eine Verzierungszutat mit Mengenangabe zur Verzierungszutatenliste
+	 * hinzu
+	 * @param name Name der Zutat
+	 * @param einheiten Anzahl der Einheiten, die fuer Rezept benoetigt werden
+     */
+	void addVerzierung(zutat ingredient);
+
+	/**
+	 * lese die Menge der Zutaten ab
+	 * @param map zutaten, der die menge beeinhaltet
+	 */
 	map<string,zutat>  geMaptZutatMenge();
+
 	/**
-	* lese die Menge der Zutaten ab
-	* @param map verzeirungen, die die menge beeinhaltet
-	*/
+	 * lese die Menge der Zutaten ab
+	 * @param map verzeirungen, die die menge beeinhaltet
+	 */
 	map<string, zutat> getVerzierungsMenge();
 
 	/**
 	* Gibt Name der Teigsorte zurück 
-	* return Name
+	* @return Name
 	*/
 	string getTeigName();
+
 	/**
-	*Gibt Basis Anzahl der Plaetzchen 
-	*
-	*/
+	 * Gibt Basis Anzahl der Plaetzchen 
+	 * @return Stueckzahl des Rezeptes
+	 */
 	double getBasisPlaetzchenAnzahl();
 	/**
-	* Gibt die Groesse der Plaetzchen in string
-	*/
+	 * Gibt die Groesse der Plaetzchen als string
+     * @example gross, mittel oder klein
+	 */
 	string getPlaetzchenGroesse();
+
 	/**
-	*Gibt Form der Plaetzechen zurück
-	*
-	*/
+	 * Gibt Form der Plaetzechen zurück
+	 * @example Stern, Oval, Kreis, Quadrat, Rechteck, Dreieck
+	 */
 	string getForm();
+
 	/**
-	*Gibt die Breite  der Plaetzchen zurück
-	*
-	*/
+ 	 * Gibt die Breite  der Plaetzchen zurück
+     * @parameter groesse Gross, mittel oder klein
+     */
 	double getXBetrag(string groesse);
+
 	/**
-	*@parameter groess: Gross, mittel oder Klein
-	*Gibt Höhe der Plaetzchen in abheangigkeit der Groesse zurück
-	*
-	*/
+     * Gibt Höhe der Plaetzchen in abheangigkeit der Groesse zurück
+     * @parameter groesse gross, mittel oder klein
+	 */
 	double getYBetrag(string groesse);
+
 	/**
-	*@parameter groess: Gross, mittel oder Klein
-	*Gibt die Backtemperatur in abheangigkeit der Groesse zurück
-	*
-	*/
+	 * Gibt die Backtemperatur in abheangigkeit der Groesse zurück
+     */
 	double getBackTemperatur();
+
 	/**
-	*Gibt die Backzeit zurück
-	*
-	*/
+	 * Gibt die Backzeit zurück
+     */
 	double getBackZeit();
-	/**
-	*/
-	//double plaetzchenGroesse(string groesse);
-	rezept();
+
+    rezept();
 	~rezept();
 };
