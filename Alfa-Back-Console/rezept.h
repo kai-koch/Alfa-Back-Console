@@ -134,6 +134,7 @@ public:
      * Veraltet wird entfernt.
      */
     rezept getKonfigdatei();
+
     rezept();
 	~rezept();
 };
