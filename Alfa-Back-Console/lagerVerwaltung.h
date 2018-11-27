@@ -64,6 +64,7 @@ public:
 	 * mit zwei maps zur Lagerverawltung lagerBestandZutaten und lagerBestandVerzierungen
 	 */
 	lagerVerwaltung(map<string, zutat*> lagerBestandZutaten, map<string, zutat*> lagerBestandVerzierungen);
+
     /** @constructor */
 	lagerVerwaltung();
 };
