@@ -32,8 +32,31 @@ rezept* readConfig::buildRezept(string line)
     vector<string> columns = split(line, '\t');
     for(int i=0; i < columns.size(); i += 1)
     {
+        vector<string> field = split(columns[i], ':');
+        if (field[0] == "teigname")
+        {
+            
+        }
+        if (field[0] == "teigname")
+        {
 
+        }
+        if (field[0] == "teigname")
+        {
 
+        }
+        if (field[0] == "teigname")
+        {
+
+        }
+        if (field[0] == "teigname")
+        {
+
+        }
+        if (field[0] == "teigname")
+        {
+
+        }
     }
 
     return daRezept;

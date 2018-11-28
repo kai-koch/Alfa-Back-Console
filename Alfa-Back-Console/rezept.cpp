@@ -38,6 +38,36 @@ rezept* rezept::getKonfigdatei()
 	return schokoPlaetzchen;
 }
 
+void rezept::setTeigname(string tn)
+{
+    tgName = tn;
+}
+
+void rezept::setAnzahl(double anz)
+{
+    basisAnzahlPlaetzchen = anz;
+}
+
+void rezept::setForm(string frm)
+{
+    plaetzchenForm = frm;
+}
+
+void rezept::setGroesse(string gr)
+{
+    plaetzchenGroesse = gr;
+}
+
+void rezept::setBacktemperatur(double temp)
+{
+    backTemp = temp;
+}
+
+void rezept::setBackzeit(double zeit)
+{
+    backZt = zeit;
+}
+
 map<string, zutat*> rezept::getZutatMenge()
 {
 	return zutaten;

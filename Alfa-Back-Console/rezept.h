@@ -140,6 +140,13 @@ public:
      * Veraltet wird entfernt.
      */
     rezept* getKonfigdatei();
+    
 
+    void setTeigname(string tn);
+    void setAnzahl(double anz);
+    void setForm(string frm);
+    void setGroesse(string gr);
+    void setBacktemperatur(double temp);
+    void setBackzeit(double zeit);
 	~rezept();
 };
