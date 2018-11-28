@@ -49,6 +49,10 @@ void AutomatSteuerung::blechBelegen()
 
 void AutomatSteuerung::Backen(int Zeit)
 {
+	int ZeitMapping;
+	double progress = 0.0; //float
+	int newline = 0;
+
 	divider();
 	int coutlock = false;
 
@@ -62,15 +66,12 @@ void AutomatSteuerung::Backen(int Zeit)
 	bool gemacht = false;
 	bool informiert = false;
 	bool ZusammenfassungState = true;
-	double progress = 0.0; //float
-	int ZeitMapping;
 	//double EventStatus1;
 	string S;
 	int intStern = 0;
 	int a = 0;
 	int b = 0;
 	int c = 0;
-	int newline = 0;
 
 	int TimerStartZahler = 0;
 	int Benachrichtigung = 0;
@@ -80,7 +81,7 @@ void AutomatSteuerung::Backen(int Zeit)
 	std::thread BackProzessTimer([&]() {
 		
 
-		ZeitMapping = Zeit + (Zeit * 2) + 20;
+		ZeitMapping = AbkuehlenVerzierungen(Zeit);
 
 		//cout << "AutomatSteuerung::Backen(int Zeit) - Mixing (Kneten) und Dividing(Portionieren) - " << 20 << endl;
 
@@ -117,17 +118,12 @@ void AutomatSteuerung::Backen(int Zeit)
 			cond_Backen.notify_one();
 		}
 
-		Bnd->setGeschwindigkeit(0);
-		
-		Ofn->setTemperatur(0);
-
-		//cls();
-
-        std::cout << "Event BackZeit " << ZeitMapping << endl;
+        //std::cout << "Event BackProzess gesamt " << ZeitMapping << endl;
 		BackProzessTimerBenachrichtigung.push(ZeitMapping);
 		gemacht = true;
 		informiert = true;
 		cond_Backen.notify_one();
+		BackProzessTimerStatus = false; // Nur 1 Prozess Lock
 	});
 
 	std::thread BackProzessTimerNotifer([&]() {
@@ -173,7 +169,7 @@ void AutomatSteuerung::Backen(int Zeit)
 					{
 						if (b == 0)
 						{
-						cout << "Mixing (Kneten) und Dividing(Portionieren) + Backen(int Zeit) + Cooling(Kühlen) und Finisching(Bezuckern)" << Zeit << endl;
+						cout << "Mixing (Kneten) und Dividing(Portionieren) + Backen(int Zeit) + Cooling(Kühlen) und Finisching(Bezuckern) " << Zeit << endl;
 						b = 1;
 						newline = 1;
 					    }
@@ -186,6 +182,7 @@ void AutomatSteuerung::Backen(int Zeit)
 						//TimerStartZahler = 0;
 						c = 1;
 						newline = 1;
+						TimerStartZahler = 4;
 						
 						}
 					}
@@ -219,19 +216,8 @@ void AutomatSteuerung::Backen(int Zeit)
 							std::cout << "] " << int(progress * 100.0) << " %\r"; //
 							//std::cout.flush();
 						}
-
-
-						//std::cout << std::endl;
-						
-
 						progress += static_cast<double>(1) / ZeitMapping;
 					}
-
-					//std::cout << std::endl;
-					//////////////////////////////////////////////////////////////////////////////////
-
-				//std::cout << std::endl;
-				//////////////////////////////////////////////////////////////////////////////////
 
 				BackProzessTimerBenachrichtigung.pop();
 			}
@@ -239,8 +225,6 @@ void AutomatSteuerung::Backen(int Zeit)
 		
 		}
 	});
-
-	BackProzessTimerStatus = false; // Nur 1 Prozess Lock
 
 	BackProzessTimer.join(); //join();
 	BackProzessTimerNotifer.join(); //detach();
@@ -258,29 +242,22 @@ void AutomatSteuerung::Backen(int Zeit)
 
 	} // If 
 
+	cout << endl;
 	divider();
 
 	//return true;
 }
 
-void AutomatSteuerung::Abkuehlen(int)
+int AutomatSteuerung::AbkuehlenVerzierungen(int BackZeitIn)
 {
-
+	int ZeitMapping;
 // Rechnen fürs das Abkuehlen
-
-}
-
-void AutomatSteuerung::Verzierungen()
-{
-
-// Rechnen fürs das Verzierung
-
+	ZeitMapping = BackZeitIn + (BackZeitIn * 2) + 20;
+	return ZeitMapping;
 }
 
 void AutomatSteuerung::VerweilDauerBestimmen()
 {
-
-
 
 }
 
@@ -317,20 +294,15 @@ void AutomatSteuerung::InitClassen(AutomatSteuerung * As)
 
 	std::thread tw1 = ATM->StartThreadAusnahmeMonitor();
 	tw1.detach();
-	//thread PSMthread2(&AusnahmenUndThreadsMon::StartAusnahmenMonitor(), AusnahmenUndThreadsMon());
-	//PSMthread2.detach(); //AusnahmenUndThreadsMon ATM; // Thread Lock Erstellen oder aus DO verschieben
-
 }
 
 void AutomatSteuerung::InitDelete(AutomatSteuerung * As)
 {
-
 	delete Ofn;
 	delete Bnd;
 	delete AM;
 	delete PL;
 	delete OfnSu;
-
 }
 
 Ofen * AutomatSteuerung::getOfen()
@@ -381,4 +353,15 @@ void AutomatSteuerung::setParameterListe(ParameterListe * PL1)
 void AutomatSteuerung::setOfenSteuerung(OfenSteuerung * setOfSteu1)
 {
 	OfnSu = setOfSteu1;
+}
+
+int AutomatSteuerung::GetJobQueueStatus()
+{
+	return JobQueueStatus;
+}
+
+void AutomatSteuerung::SetJobQueueStatus(int Status)
+{
+	//std::cout << "Event BackProzess gesamt " << JobQueueStatus << endl;
+	JobQueueStatus = Status;
 }
