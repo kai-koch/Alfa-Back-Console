@@ -21,32 +21,42 @@ bool lagerVerwaltung::pruefeLageBestand(map<string,zutat*> zutatMenge, map<strin
 	for (map<string, zutat*>::iterator it = zutatMenge.begin(); it != zutatMenge.end(); it++)
 	{
 		string name = it->second->getName();
-		//cout << " name gesucht zutat " << name << endl;
+		cout << " name gesucht zutat " << name << endl;
 		double  menge = lagerBestandZt.find(name)->second->getMenge();
-		//cout << " suchende menge " << menge<<endl;
-		if (it->second->getMenge()>=menge)
+		cout << " suchende menge " << menge<<endl;
+		if (it->second->getMenge()<=menge)
+		{
+			lageZustandZutat = true;
+		}	
+		else 
 		{
 			lageZustandZutat = false;
-		}	
+		}
 	}
+	cout << "zutat geprueft " << endl<< endl;
 	// Schleife zu ueberpruefen von Verfuegbarkeit der Verzierungen Bestandes
 	for (map<string, zutat*>::iterator it = verzierungMenge.begin(); it != verzierungMenge.end(); it++)
 	{
 		string name = it->second->getName();
-		//cout << " name gesucht zutat " << name << endl;
+		cout << " name gesucht zutat " << name << endl;
 		double  menge = lagerBestandVezgen.find(name)->second->getMenge();
 		if(menge >= (it->second)->getMenge())
+		{
+			lageZustandVerzierungen = true;
+		}
+		else
 		{
 			lageZustandVerzierungen = false;
 		}
 	}
-
+	cout << " vorhandene bestell menge in der lage " << (lageZustandZutat & lageZustandVerzierungen) << endl << endl;
 	return (lageZustandZutat&lageZustandVerzierungen);
 }
 //Bestellmenge von der Lage abziehen, falls genug ware da ist.
 void lagerVerwaltung::bestellMengeAbziehenLage(map<string, zutat*> zutatMenge, map<string, zutat*> verzierungMenge)
 {
-	if(pruefeLageBestand(zutatMenge,verzierungMenge))
+	bool pruefe = pruefeLageBestand(zutatMenge, verzierungMenge);
+	if(pruefe)
 	{
 	for (map<string, zutat*>::iterator it = zutatMenge.begin(); it != zutatMenge.end(); it++)
 	{
@@ -60,6 +70,10 @@ void lagerVerwaltung::bestellMengeAbziehenLage(map<string, zutat*> zutatMenge, m
 		double menge = lagerBestandVezgen.find(name)->second->getMenge();
 		lagerBestandVezgen[name]->setMenge((menge - (it->second->getMenge())));
 	}
+	}
+	else
+	{
+		cout<<" nicht genug Ware in der Lage bitte nach bestellen!!"<<endl; 
 	}
 }
 

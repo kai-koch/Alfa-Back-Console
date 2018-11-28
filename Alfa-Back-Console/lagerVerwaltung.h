@@ -23,6 +23,9 @@ private:
         lagerBestandZt.insert(pair<string, zutat*>("Rum", new zutat("Rum", 100, "l")));
         lagerBestandZt.insert(pair<string, zutat*>("Vanillinzucker", new zutat("Vanillinzucker",10000, "g")));
         lagerBestandZt.insert(pair<string, zutat*>("Kakao", new zutat("Kakao", 10000, "g")));
+		
+		lagerBestandZt.insert(pair<string, zutat*>("Zucker", new zutat("Zucker", 10000, "g")));
+
         lagerBestandVezgen.insert(pair<string, zutat*>("Kakaoguss", new zutat("Kakaoguss", 100, "l")));
         lagerBestandVezgen.insert(pair<string, zutat*>("Schokostreusel", new zutat("Schokostreusel", 10000, "g")));
         lagerBestandVezgen.insert(pair<string, zutat*>("Zuckerstreusel(bunt)",new zutat("Zuckerstreusel(bunt)", 10000, "g")));
