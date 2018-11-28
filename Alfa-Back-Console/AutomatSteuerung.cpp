@@ -118,8 +118,10 @@ void AutomatSteuerung::Backen(int Zeit)
 		}
 
 		Bnd->setGeschwindigkeit(0);
+		
+		Ofn->setTemperatur(0);
 
-		cls();
+		//cls();
 
         std::cout << "Event BackZeit " << ZeitMapping << endl;
 		BackProzessTimerBenachrichtigung.push(ZeitMapping);
