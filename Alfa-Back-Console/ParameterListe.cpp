@@ -74,8 +74,9 @@ bool ParameterListe::TeigSortePruefen()
 
 bool ParameterListe::ZusammenfassungFunc()
 {
+	/*
 	std::mutex mu;
-	mu.lock();
+	mu.lock();*/
 	//
 	vector<bool> VectroBool(MaxEnumErrorSIZE, true);
 	vector<bool>::iterator ITERator;
@@ -142,7 +143,7 @@ bool ParameterListe::ZusammenfassungFunc()
 
 	return PL1->my_Param2.ZusammenfassungBool;
 	
-	mu.unlock();
+	//mu.unlock();
 }
 
 

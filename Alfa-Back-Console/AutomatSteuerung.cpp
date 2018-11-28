@@ -96,7 +96,7 @@ void AutomatSteuerung::Backen(int Zeit)
 			cond_Backen.notify_one();
 		}
 
-		cout << "AutomatSteuerung::Backen(int Zeit) - Cooling(Kühlen) und Finisching(Bezuckern) - " << (Zeit * 2) << endl;
+		cout << "AutomatSteuerung::Backen(int Zeit) - Cooling(Kühlen) und Finisching(Bezuckern) - " << (Zeit * 2) << endl << '\n';
 
 		for (int ib = 0; ib < 20; ++ib)
 		{
@@ -151,7 +151,7 @@ void AutomatSteuerung::Backen(int Zeit)
 						int BackProgressGroese = 70;
 
 						std::cout << "[";
-						int pos = BackProgressGroese * progress; //int 13.15 27 November
+						int pos = static_cast<int>(BackProgressGroese * progress); //int 13.15 27 November
 						for (int i = 0; i < BackProgressGroese; ++i) {
 							if (i < pos) std::cout << "=";
 							else if (i == pos) std::cout << "|>";
