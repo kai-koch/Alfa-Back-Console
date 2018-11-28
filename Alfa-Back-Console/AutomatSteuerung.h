@@ -40,6 +40,7 @@ public:
 	void VerweilDauerBestimmen();
 
 	void InitClassen(AutomatSteuerung * As);
+	void InitDelete(AutomatSteuerung * As);
 
 	Ofen *  getOfen();
 	Band * getBand();

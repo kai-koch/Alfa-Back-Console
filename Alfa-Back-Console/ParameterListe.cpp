@@ -14,6 +14,7 @@
 #include <iostream>
 #include <functional>
 #include <string>
+#include <mutex>
 using namespace std;
 
 
@@ -73,6 +74,9 @@ bool ParameterListe::TeigSortePruefen()
 
 bool ParameterListe::ZusammenfassungFunc()
 {
+	std::mutex mu;
+	mu.lock();
+	//
 	vector<bool> VectroBool(MaxEnumErrorSIZE, true);
 	vector<bool>::iterator ITERator;
 	size_t Hashret = 0;
@@ -138,76 +142,86 @@ bool ParameterListe::ZusammenfassungFunc()
 
 	return PL1->my_Param2.ZusammenfassungBool;
 	
-
+	mu.unlock();
 }
 
 
 int ParameterListe::GetErrorListe()
 {
+
 	return 0;
 }
 
 int ParameterListe::SetSetZutatenTrueFalse(bool TrueFalse)
 {
-	Param sParam1;
-	sParam1.ZutatenBool = TrueFalse;
+	ParameterListe* PL1;
+	PL1 = AutomatSteuerungParameterListe->getParameterListe();
+	PL1->my_Param.ZutatenBool = TrueFalse;
 	return 0;
 }
 
 int ParameterListe::SetVerzierungTrueFalse(bool TrueFalse)
 {
-	Param sParam1;
-	sParam1.VerzierungBool = TrueFalse;
+	ParameterListe* PL1;
+	PL1 = AutomatSteuerungParameterListe->getParameterListe();
+	PL1->my_Param.VerzierungBool = TrueFalse;
 	return 0;
 }
 
 int ParameterListe::SetTeigTrueFalse(bool TrueFalse)
 {
-	Param sParam1;
-	sParam1.TeigBool = TrueFalse;
+	ParameterListe* PL1;
+	PL1 = AutomatSteuerungParameterListe->getParameterListe();
+	PL1->my_Param.TeigBool = TrueFalse;
 	return 0;
 }
 
 int ParameterListe::SetFormTrueFalse(bool TrueFalse)
 {
-	Param sParam1;
-	sParam1.FormBool = TrueFalse;
+	ParameterListe* PL1;
+	PL1 = AutomatSteuerungParameterListe->getParameterListe();
+	PL1->my_Param.FormBool = TrueFalse;
 	return 0;
 }
 
 int ParameterListe::SetConfigTrueFalse(bool TrueFalse)
 {
-	Param sParam1;
-	sParam1.ConfigFileBool = TrueFalse;
+	ParameterListe* PL1;
+	PL1 = AutomatSteuerungParameterListe->getParameterListe();
+	PL1->my_Param.ConfigFileBool = TrueFalse;
 	return 0;
 }
 
 int ParameterListe::SetTeigroesseTrueFalse(bool TrueFalse)
 {
-	Param sParam1;
-	sParam1.TeigGroesseBool = TrueFalse;
+	ParameterListe* PL1;
+	PL1 = AutomatSteuerungParameterListe->getParameterListe();
+	PL1->my_Param.TeigGroesseBool = TrueFalse;
 	return 0;
 }
 
 int ParameterListe::SetBlechAusfuelungTrueFalse(bool TrueFalse)
 {
-	Param sParam1;
-	sParam1.BlechAusFuellungBool = TrueFalse;
+	ParameterListe* PL1;
+	PL1 = AutomatSteuerungParameterListe->getParameterListe();
+	PL1->my_Param.BlechAusFuellungBool = TrueFalse;
 	return 0;
 }
 
 
 int ParameterListe::SetTeigSorteTrueFalse(bool TrueFalse)
 {
-	Param sParam1;
-	sParam1.TeigSorteBool = TrueFalse;
+	ParameterListe* PL1;
+	PL1 = AutomatSteuerungParameterListe->getParameterListe();
+	PL1->my_Param.TeigSorteBool = TrueFalse;
 	return 0;
 }
 
 int ParameterListe::SetZusammenfassungFuncTrueFalse(bool TrueFalse)
 {
-	ParamA sParam2;
-	sParam2.ZusammenfassungBool = TrueFalse;
+	ParameterListe* PL1;
+	PL1 = AutomatSteuerungParameterListe->getParameterListe();
+	PL1->my_Param2.ZusammenfassungBool = TrueFalse;
 	return 0;
 }
 

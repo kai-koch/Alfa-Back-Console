@@ -63,14 +63,24 @@ public:
 
 	struct Param
 	{
+		//1.
 		bool ZutatenBool = false;
 		bool VerzierungBool = true;
+		///////////// 2.
 		bool TeigBool = true;
-		bool FormBool = false;
-		bool TeigGroesseBool = false;
-		bool TeigSorteBool = true;
-		bool ConfigFileBool = false;
-		bool BlechAusFuellungBool = true;
+		////////////3.
+		bool FormBool = false; //String
+		////// 
+		bool TeigGroesseBool = false; //String
+		/////
+		bool TeigSorteBool = true; // Config Prüfung 0. 
+		bool ConfigFileBool = false; 
+		/////
+
+		bool BlechAusFuellungBool = true;  // BlechMenge // Rest
+
+		//bool Backzeit = true // + 40 Min Kneten usw.
+		//Temperatur //
 	};
 	Param my_Param;
 

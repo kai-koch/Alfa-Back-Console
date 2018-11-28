@@ -62,14 +62,30 @@ void AutomatSteuerung::Backen(int Zeit)
 	bool informiert = false;
 	bool ZusammenfassungState = true;
 	double progress = 0.0; //float
-	double EventStatus1;
+	int ZeitMapping;
+	//double EventStatus1;
 	string S;
 	int intStern = 0;
 
 
 	std::thread BackProzessTimer([&]() {
 		
-		cout << "AutomatSteuerung::Backen(int Zeit) - Der Kuchen wird gebacken - " << Zeit << endl << endl;
+
+		ZeitMapping = (Zeit * 2) + 20;
+
+		cout << "AutomatSteuerung::Backen(int Zeit) - Mixing (Kneten) und Dividing(Portionieren) - " << 20 << endl;
+
+		for (int ia = 0; ia < 20; ++ia)
+		{
+			std::this_thread::sleep_for(std::chrono::seconds(1));
+			std::unique_lock<std::mutex> lock(Backen_mutex);
+			BackProzessTimerBenachrichtigung.push(ia);
+			informiert = true;
+			cond_Backen.notify_one();
+		}
+
+
+		cout << "AutomatSteuerung::Backen(int Zeit) - Der Kuchen wird gebacken - " << Zeit << endl;
 		
 		for (int i = 0; i < Zeit; ++i)
 		{
@@ -80,14 +96,23 @@ void AutomatSteuerung::Backen(int Zeit)
 			cond_Backen.notify_one();
 		}
 
+		cout << "AutomatSteuerung::Backen(int Zeit) - Cooling(Kühlen) und Finisching(Bezuckern) - " << (Zeit * 2) << endl;
+
+		for (int ib = 0; ib < 20; ++ib)
+		{
+			std::this_thread::sleep_for(std::chrono::seconds(1));
+			std::unique_lock<std::mutex> lock(Backen_mutex);
+			BackProzessTimerBenachrichtigung.push(ib);
+			informiert = true;
+			cond_Backen.notify_one();
+		}
 
 		Bnd->setGeschwindigkeit(0);
 
-
 		cls();
 
-        std::cout << "Event BackZeit " << Zeit << '\n';
-		BackProzessTimerBenachrichtigung.push(Zeit);
+        std::cout << "Event BackZeit " << ZeitMapping << '\n';
+		BackProzessTimerBenachrichtigung.push(ZeitMapping);
 		gemacht = true;
 		informiert = true;
 		cond_Backen.notify_one();
@@ -126,18 +151,20 @@ void AutomatSteuerung::Backen(int Zeit)
 						int BackProgressGroese = 70;
 
 						std::cout << "[";
-						double pos = BackProgressGroese * progress; //int 13.15 27 November
+						int pos = BackProgressGroese * progress; //int 13.15 27 November
 						for (int i = 0; i < BackProgressGroese; ++i) {
 							if (i < pos) std::cout << "=";
-							else if (i == pos) std::cout << ">";
+							else if (i == pos) std::cout << "|>";
 							else std::cout << " ";
 						}
 						std::cout << "] " << int(progress * 100.0) << " %\r"; //
-						std::cout.flush();
+						//std::cout.flush();
 
-						progress += static_cast<double>(1) / Zeit;
+						progress += static_cast<double>(1) / ZeitMapping;
 					}
-					std::cout << std::endl;
+//					else 
+
+					//std::cout << std::endl;
 					//////////////////////////////////////////////////////////////////////////////////
 
 				//std::cout << std::endl;
@@ -175,14 +202,23 @@ void AutomatSteuerung::Backen(int Zeit)
 
 void AutomatSteuerung::Abkuehlen(int)
 {
+
+// Rechnen fürs das Abkuehlen
+
 }
 
 void AutomatSteuerung::Verzierungen()
 {
+
+// Rechnen fürs das Verzierung
+
 }
 
 void AutomatSteuerung::VerweilDauerBestimmen()
 {
+
+
+
 }
 
 
@@ -220,6 +256,17 @@ void AutomatSteuerung::InitClassen(AutomatSteuerung * As)
 	tw1.detach();
 	//thread PSMthread2(&AusnahmenUndThreadsMon::StartAusnahmenMonitor(), AusnahmenUndThreadsMon());
 	//PSMthread2.detach(); //AusnahmenUndThreadsMon ATM; // Thread Lock Erstellen oder aus DO verschieben
+
+}
+
+void AutomatSteuerung::InitDelete(AutomatSteuerung * As)
+{
+
+	delete Ofn;
+	delete Bnd;
+	delete AM;
+	delete PL;
+	delete OfnSu;
 
 }
 
