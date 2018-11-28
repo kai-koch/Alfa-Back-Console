@@ -23,7 +23,8 @@ bool OfenSteuerung::OfenTemperaturStatus()
 	Ofen * Ofen1;
 	Ofen1 = AutomatSteuerungOfenSteuerung->getOfen();
 	Temperat = Ofen1->getTemperatur();
-	cout << "bool OfenSteuerung::OfenTemperaturStatus()" << Temperat << endl;
+	cout << "bool OfenSteuerung::OfenTemperaturStatus() - " << Temperat << "C" << endl;
+	
 	if (Temperat == 0)
 	{
 		return false;

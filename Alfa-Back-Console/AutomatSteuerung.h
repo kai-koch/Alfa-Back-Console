@@ -30,6 +30,9 @@ class AutomatSteuerung
 	OfenSteuerung * OfnSu;
 
 public:
+
+
+
 	int JobQueueStatus;
 	void plaetzchenAnzahlErmitteln();
 	void blechAnzahlErmitteln();
