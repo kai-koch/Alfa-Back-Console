@@ -252,8 +252,10 @@ int ParameterListe::TryCatchLoop(string ExceptMessageS, string CoutMessages, int
 	catch (int e) //e -ErrorNumber
 	{
 		//cout << ExceptMessageS << e << endl << endl;
+		int Error = e;
 	}
 
+	return 0;
 }
 
 int ParameterListe::TryCatchLoop(string ExceptMessageS, string CoutMessages, int ErrorNumber, bool FlagTest, vector<bool>& VectorBoolPL, vector<bool>::iterator ITERator )
