@@ -47,6 +47,9 @@ private:
 
 	/** plaetzchen Groesse: gross, mittel, klein*/
 	string plaetzchenGroesse;
+
+    /** priv @Constructor */
+    rezept();
 public:
 	/**
 	 * Properties der Klasse setzen
@@ -138,6 +141,5 @@ public:
      */
     rezept* getKonfigdatei();
 
-    rezept();
 	~rezept();
 };
