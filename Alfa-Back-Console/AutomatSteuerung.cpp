@@ -151,7 +151,7 @@ void AutomatSteuerung::Backen(int Zeit)
 						int BackProgressGroese = 70;
 
 						std::cout << "[";
-						int pos = BackProgressGroese * progress; //int 13.15 27 November
+						int pos = (int)(BackProgressGroese * progress); //int 13.15 27 November
 						for (int i = 0; i < BackProgressGroese; ++i) {
 							if (i < pos) std::cout << "=";
 							else if (i == pos) std::cout << "|>";
