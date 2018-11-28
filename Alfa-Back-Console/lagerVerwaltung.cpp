@@ -16,46 +16,51 @@ void lagerVerwaltung::setEinganswareZutaten(zutat* eingangswareZutaten)
 
 bool lagerVerwaltung::pruefeLageBestand(map<string,zutat*> zutatMenge, map<string, zutat*> verzierungMenge)
 {
-	// iterator zu durchgehen von Zutatmenge map
-	map<string, zutat*>::iterator it_zutatMenge = zutatMenge.begin();
-	// iterator zu durchgehen von Verzierungmenge map
-	map<string, zutat*>::iterator it_verzierungMenge = verzierungMenge.begin();
-
 	bool lageZustandZutat{ true }, lageZustandVerzierungen{ true };
-
 	// Schleife zu ueberpruefen von Verfuegbarkeit des Zutaten Bestandes
-	for (map<string, zutat*>::iterator it = lagerBestandZt.begin(); it != lagerBestandZt.end(); it++)
+	for (map<string, zutat*>::iterator it = zutatMenge.begin(); it != zutatMenge.end(); it++)
 	{
-		if ((((it->second)->getName()).compare(it_zutatMenge->second->getName())))
+		string name = it->second->getName();
+		//cout << " name gesucht zutat " << name << endl;
+		double  menge = lagerBestandZt.find(name)->second->getMenge();
+		//cout << " suchende menge " << menge<<endl;
+		if (it->second->getMenge()>=menge)
 		{
-			if (((it->second)->getMenge() >= (it_zutatMenge->second)->getMenge()))
-			{
-				lagerBestandZt[it->first]->setMenge((((it->second)->getMenge()) - (it_zutatMenge->second)->getMenge()));
-			}
-			else
-			{
-				lageZustandZutat = false;
-			}
-		}
-		
+			lageZustandZutat = false;
+		}	
 	}
 	// Schleife zu ueberpruefen von Verfuegbarkeit der Verzierungen Bestandes
-	for (map<string, zutat*>::iterator it = lagerBestandVezgen.begin(); it != lagerBestandVezgen.end(); it++)
+	for (map<string, zutat*>::iterator it = verzierungMenge.begin(); it != verzierungMenge.end(); it++)
 	{
-		if ((((it->second)->getName()).compare(it_verzierungMenge->second->getName())))
+		string name = it->second->getName();
+		//cout << " name gesucht zutat " << name << endl;
+		double  menge = lagerBestandVezgen.find(name)->second->getMenge();
+		if(menge >= (it->second)->getMenge())
 		{
-			if ((it->second)->getMenge() >= (it_verzierungMenge->second)->getMenge())
-			{
-				lagerBestandVezgen[it->first]->setMenge(((it->second)->getMenge()) - ((it_verzierungMenge->second)->getMenge()));
-			}
-			else
-			{
-				lageZustandVerzierungen = false;
-			}
+			lageZustandVerzierungen = false;
 		}
 	}
 
 	return (lageZustandZutat&lageZustandVerzierungen);
+}
+//Bestellmenge von der Lage abziehen, falls genug ware da ist.
+void lagerVerwaltung::bestellMengeAbziehenLage(map<string, zutat*> zutatMenge, map<string, zutat*> verzierungMenge)
+{
+	if(pruefeLageBestand(zutatMenge,verzierungMenge))
+	{
+	for (map<string, zutat*>::iterator it = zutatMenge.begin(); it != zutatMenge.end(); it++)
+	{
+		string name = it->second->getName();
+		double menge = lagerBestandZt.find(name)->second->getMenge();
+		lagerBestandZt[name]->setMenge((menge - (it->second->getMenge())));
+	}
+	for (map<string, zutat*>::iterator it = verzierungMenge.begin(); it != verzierungMenge.end(); it++)
+	{
+		string name = it->second->getName();
+		double menge = lagerBestandVezgen.find(name)->second->getMenge();
+		lagerBestandVezgen[name]->setMenge((menge - (it->second->getMenge())));
+	}
+	}
 }
 
 void lagerVerwaltung::lagerBestandAnzeigen()

@@ -54,7 +54,12 @@ public:
 	 * @Parameter verzierungMenge
 	 */
 	bool pruefeLageBestand(map<string, zutat*> zutatMenge, map<string, zutat*> verzierungMenge);
-
+	/**
+	*Bestellung an Zutaten und Verzierungen von der Lagerbestand abziehen
+	*@ Parameter zutatMenge
+	*@ Parameter verzierungMenge
+	*/
+	void bestellMengeAbziehenLage(map<string, zutat*> zutatMenge, map<string, zutat*> verzierungMenge);
 	/**
 	 * lagerbestand anzeigen lassen
 	 */
