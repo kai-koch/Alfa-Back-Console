@@ -35,6 +35,26 @@ AutomatSteuerung::~AutomatSteuerung()
 
 }
 
+void AutomatSteuerung::SetrezeptRrezepteinlesen(rezept * rezepteinlesen1)
+{
+	rezepteinlesen = rezepteinlesen1;
+}
+
+void AutomatSteuerung::SetlagerVerwaltunglgVerwaltung(lagerVerwaltung * lgVerwaltung1)
+{
+lgVerwaltung = lgVerwaltung1;
+}
+
+rezept * AutomatSteuerung::GetrezeptRrezepteinlesen()
+{
+	return rezepteinlesen;
+}
+
+lagerVerwaltung * AutomatSteuerung::GetlagerVerwaltunglgVerwaltung()
+{
+	return lgVerwaltung;
+}
+
 void AutomatSteuerung::plaetzchenAnzahlErmitteln()
 {
 }
