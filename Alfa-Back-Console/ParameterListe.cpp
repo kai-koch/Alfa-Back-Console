@@ -42,7 +42,8 @@ bool ParameterListe::ZutatenPruefen()//map <string,zutat>
 	bool Bestand = lgVerwaltung3->getLagerzustand();
 	//std::cout << Bestand << "- bool Bestand = lgVerwaltung3->getLagerzustand(); " << endl;
 	SetSetZutatenTrueFalse(Bestand);
-	return Bestand;
+	//return Bestand;
+	return true;
 }
 
 bool ParameterListe::TeigPruefen()
@@ -84,7 +85,7 @@ bool ParameterListe::ConfigPruefen()
 {
 	return false;
 }
-
+/*
 bool ParameterListe::Teigroesse()
 {
 	double x;
@@ -103,10 +104,12 @@ bool ParameterListe::Teigroesse()
 		SetTeigroesseTrueFalse(false);
 		return false;
 	}
-	*/
+	
 	return false;
 }
+*/
 
+/*
 bool ParameterListe::BlechAusfuelungPruefen()
 {
 	double PlaetzchenAnzahl;
@@ -121,6 +124,7 @@ bool ParameterListe::BlechAusfuelungPruefen()
 
 	return false;
 }
+*/
 
 bool ParameterListe::BackzeitPruefen()
 {
@@ -167,20 +171,19 @@ bool ParameterListe::ZusammenfassungFunc()
 
 	ParameterListe* PL1;
 	PL1 = AutomatSteuerungParameterListe->getParameterListe();
-
+	/*
 	ZutatenPruefen();
 	TeigPruefen();
 	FormPruefen();
 	ConfigPruefen();
-	Teigroesse();
-	BlechAusfuelungPruefen();
+	*/
+	//Teigroesse();
+//	BlechAusfuelungPruefen();
+	/*
 	BackzeitPruefen();
 	TemperaturPruefen();
-
-/* 
-	Param sParam1;
-	//Param *Param_1;
-	ParamA sParam2;*/
+	*/
+	TemperaturPruefen();
 
 	HashGruensize_t = std::hash<std::vector<bool>>()(VectroBool);
 	HashGruen = std::to_string(HashGruensize_t);
@@ -195,11 +198,11 @@ bool ParameterListe::ZusammenfassungFunc()
 	// exceptions
 	TryCatchLoop("An exception occurred. Exception FormBool  - ", "FormBool", Form, PL1->my_Param.FormBool, VectroBool);
 	// exceptions
-	TryCatchLoop("An exception occurred. Exception TeigGroesseBool - ", "TeigGroesseBool", TeigGroesse, PL1->my_Param.TeigGroesseBool, VectroBool);
+	//TryCatchLoop("An exception occurred. Exception TeigGroesseBool - ", "TeigGroesseBool", TeigGroesse, PL1->my_Param.TeigGroesseBool, VectroBool);
 	// exceptions
 	TryCatchLoop("An exception occurred. Exception ConfigFileBool - ", "ConfigFileBool", ConfigFile, PL1->my_Param.ConfigFileBool, VectroBool);
 	// exceptions
-	TryCatchLoop("An exception occurred. Exception BlechAusFuellungBool - ", "BlechAusFuellungBool", BlechAusFuellung, PL1->my_Param.BlechAusFuellungBool, VectroBool);
+	//TryCatchLoop("An exception occurred. Exception BlechAusFuellungBool - ", "BlechAusFuellungBool", BlechAusFuellung, PL1->my_Param.BlechAusFuellungBool, VectroBool);
 
 	TryCatchLoop("An exception occurred. Exception BackzeitBool - ", "BackzeitBool", BackzeitEnum, PL1->my_Param.BackzeitBool, VectroBool);
 	// exceptions
@@ -222,8 +225,12 @@ bool ParameterListe::ZusammenfassungFunc()
 
 	if (HashGruen.compare(Hash_str) != 0)
 	{
-		//std::cout << HashGruen << "- HashGruen is not Exception Matrix Hash : " << Hash_str << endl;
+		std::cout << HashGruen << "- Hash - Alles ist gut - ist nicht gleich zu Error Matrix Hash : " << Hash_str << endl;
 		PL1->my_Param2.ZusammenfassungBool = false;
+	}
+	else
+	{
+		PL1->my_Param2.ZusammenfassungBool = true;
 	}
 
 	// exceptions
@@ -275,6 +282,7 @@ int ParameterListe::SetConfigTrueFalse(bool TrueFalse)
 	return 0;
 }
 
+/*
 int ParameterListe::SetTeigroesseTrueFalse(bool TrueFalse)
 {
 	ParameterListe* PL1;
@@ -282,7 +290,9 @@ int ParameterListe::SetTeigroesseTrueFalse(bool TrueFalse)
 	PL1->my_Param.TeigGroesseBool = TrueFalse;
 	return 0;
 }
+*/
 
+/*
 int ParameterListe::SetBlechAusfuelungTrueFalse(bool TrueFalse)
 {
 	ParameterListe* PL1;
@@ -290,14 +300,22 @@ int ParameterListe::SetBlechAusfuelungTrueFalse(bool TrueFalse)
 	PL1->my_Param.BlechAusFuellungBool = TrueFalse;
 	return 0;
 }
+*/
 
-int ParameterListe::SetBackzeitTrueFalse(bool)
+int ParameterListe::SetBackzeitTrueFalse(bool TrueFalse)
 {
+	ParameterListe * PL1;
+	PL1 = AutomatSteuerungParameterListe->getParameterListe();
+	PL1->my_Param.BackzeitBool = TrueFalse;
+	return 0;
 	return 0;
 }
 
-int ParameterListe::SetTemperaturTrueFalse(bool)
+int ParameterListe::SetTemperaturTrueFalse(bool TrueFalse)
 {
+	ParameterListe * PL1;
+	PL1 = AutomatSteuerungParameterListe->getParameterListe();
+	PL1->my_Param.TemperaturBool = TrueFalse;
 	return 0;
 }
 
@@ -356,19 +374,22 @@ int ParameterListe::TryCatchLoop(string ExceptMessageS, string CoutMessages, int
 		}
 		else if (i == true)
 		{
-			std::cout << CoutMessages << " is 1" << endl;
+			//std::cout << CoutMessages << " is 1" << endl;
 		}
 
 	}
 	catch (int e)
 	{
 		//cout << ExceptMessageS << e << endl;
-		cout << "Exception Matrix :" << endl;
+		cout << "Rückmeldung einer real existierenden Maschine - Exception Matrix :" << endl;
 		for (ITERator = VectorBoolPL.begin(); ITERator != VectorBoolPL.end(); ITERator++)
 		{
 			cout << *ITERator;
 		}
 		cout << endl << endl;
+
+		cout << "Matrix:\n 1.Zutaten,\n 2.Teig,\n 3.Form,\n 4.ConfigFile,\n 5.BackzeitEnum,\n 6.TemperaturBoolEnum" << endl;
+		cout << "_____________________" << endl << endl;
 		return false;
 	}
 
