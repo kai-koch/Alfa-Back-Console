@@ -17,7 +17,7 @@ void lagerVerwaltung::setEinganswareZutaten(zutat* eingangswareZutaten)
 bool lagerVerwaltung::pruefeLageBestand(map<string,zutat*> zutatMenge, map<string, zutat*> verzierungMenge)
 {
 	bool lageZustandZutat{ true }, lageZustandVerzierungen{ true };
-	// Schleife zu ueberpruefen von Verfuegbarkeit des Zutaten Bestandes
+	/// Schleife zu ueberpruefen von Verfuegbarkeit des Zutaten Bestandes
 	for (map<string, zutat*>::iterator it = zutatMenge.begin(); it != zutatMenge.end(); it++)
 	{
 		
@@ -47,7 +47,7 @@ bool lagerVerwaltung::pruefeLageBestand(map<string,zutat*> zutatMenge, map<strin
 		}
 	}
 	
-	// Schleife zu ueberpruefen von Verfuegbarkeit der Verzierungen Bestandes
+	/// Schleife zu ueberpruefen von Verfuegbarkeit der Verzierungen Bestandes
 	for (map<string, zutat*>::iterator it = verzierungMenge.begin(); it != verzierungMenge.end(); it++)
 	{
 		string name = it->second->getName();
@@ -74,8 +74,8 @@ bool lagerVerwaltung::pruefeLageBestand(map<string,zutat*> zutatMenge, map<strin
 			break;
 		}
 	}
-	
-	return (lageZustandZutat&lageZustandVerzierungen);
+	lagerZustand = (lageZustandZutat&lageZustandVerzierungen);
+	return lagerZustand;
 }
 //Bestellmenge von der Lage abziehen, falls genug ware da ist.
 void lagerVerwaltung::bestellMengeAbziehenLage(map<string, zutat*> zutatMenge, map<string, zutat*> verzierungMenge)
@@ -100,6 +100,11 @@ void lagerVerwaltung::bestellMengeAbziehenLage(map<string, zutat*> zutatMenge, m
 	{
 		cout<<" nicht genug Ware in der Lage bitte nach bestellen!!"<<endl; 
 	}
+}
+
+bool lagerVerwaltung::getLagerzustand()
+{
+	return lagerZustand;
 }
 
 void lagerVerwaltung::lagerBestandAnzeigen()

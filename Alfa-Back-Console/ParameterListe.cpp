@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ParameterListe.h"
+#include "Ofen.h";
 #include <iostream>
 #include <string>
 #include <bitset>
@@ -17,7 +18,6 @@
 #include <mutex>
 using namespace std;
 
-
 ParameterListe::ParameterListe()
 {
 }
@@ -32,19 +32,50 @@ void ParameterListe::setAutomatSteuerungPointer(AutomatSteuerung * ASPM)
 	AutomatSteuerungParameterListe = ASPM;
 }
 
-bool ParameterListe::ZutatenPruefen()
+bool ParameterListe::ZutatenPruefen()//map <string,zutat>
 {
-	return false;
+	lagerVerwaltung * lgVerwaltung3 = AutomatSteuerungParameterListe->GetlagerVerwaltunglgVerwaltung();
+	bool Bestand = lgVerwaltung3->getLagerzustand();
+	SetSetZutatenTrueFalse(Bestand);
+	return Bestand;
+	//rezept * rezepteinlesen3 = AutomatSteuerungParameterListe->GetrezeptRrezepteinlesen();
+	//rezepteinlesen3->
+	//return Bestand;
 }
 
 bool ParameterListe::TeigPruefen()
 {
-	return false;
+	string s;
+	rezept * rezepteinlesen3 = AutomatSteuerungParameterListe->GetrezeptRrezepteinlesen();
+	s = rezepteinlesen3->getTeigName();
+
+	if (s.empty() != 0)
+	{
+		SetTeigTrueFalse(true);
+		return true;
+	}
+	else
+	{
+		SetTeigTrueFalse(false);
+		return false;
+	}
 }
 
 bool ParameterListe::FormPruefen()
 {
-	return false;
+	string s;
+	rezept * rezepteinlesen3 = AutomatSteuerungParameterListe->GetrezeptRrezepteinlesen();
+	s = rezepteinlesen3->getForm();
+	if (s.empty() != 0)
+	{
+		SetFormTrueFalse(true);
+		return true;
+	}
+	else
+	{
+		SetFormTrueFalse(false);
+		return false;
+	}
 }
 
 bool ParameterListe::ConfigPruefen()
@@ -54,17 +85,70 @@ bool ParameterListe::ConfigPruefen()
 
 bool ParameterListe::Teigroesse()
 {
+	double x;
+	double y;
+	rezept * rezepteinlesen3 = AutomatSteuerungParameterListe->GetrezeptRrezepteinlesen();
+	//x = rezepteinlesen3->getXBetrag();
+
+	/*
+	if ((x != 0) && (y != 0))
+	{
+		SetTeigroesseTrueFalse(true);
+		return true;
+	}
+	else
+	{
+		SetTeigroesseTrueFalse(false);
+		return false;
+	}
+	*/
 	return false;
 }
 
 bool ParameterListe::BlechAusfuelungPruefen()
 {
+	double PlaetzchenAnzahl;
+
+	rezept * rezepteinlesen3 = AutomatSteuerungParameterListe->GetrezeptRrezepteinlesen();
+	rezepteinlesen3->getBasisPlaetzchenAnzahl();
+	//rezepteinlesen3.pla
+
+	//AutomatSteuerungParameterListe->blechAnzahlErmitteln(PlaetzchenAnzahl, );
+
+	//blechAnzahlErmitteln(double plaetzchenAnzahl, double plaetzchenAnzahlProBlech)
+
 	return false;
 }
 
-bool ParameterListe::TeigSortePruefen()
+bool ParameterListe::BackzeitPruefen()
 {
+
+	//AutomatSteuerungParameterListe->VerweilDauerBestimmen();
 	return false;
+}
+
+bool ParameterListe::TemperaturPruefen()
+{
+	int getBackTemperatur;
+	int getAktuellTemperatur;
+
+	rezept * rezepteinlesen3 = AutomatSteuerungParameterListe->GetrezeptRrezepteinlesen();
+	getBackTemperatur = rezepteinlesen3->getBackTemperatur();
+
+	Ofen * Ofen4;
+	Ofen4 = AutomatSteuerungParameterListe->getOfen();
+	getAktuellTemperatur = Ofen4->getTemperatur();
+
+	if (getBackTemperatur = getAktuellTemperatur)
+	{
+		SetTemperaturTrueFalse(true);
+		return true;
+	}
+	else
+	{
+		SetTemperaturTrueFalse(false);
+		return false;
+	}
 }
 
 bool ParameterListe::ZusammenfassungFunc()
@@ -102,11 +186,13 @@ bool ParameterListe::ZusammenfassungFunc()
 	// exceptions
 	TryCatchLoop("An exception occurred. Exception TeigGroesseBool - ", "TeigGroesseBool", TeigGroesse, PL1->my_Param.TeigGroesseBool, VectroBool);
 	// exceptions
-	TryCatchLoop("An exception occurred. Exception TeigSorteBool - ", "TeigSorteBool", TeigSorte, PL1->my_Param.TeigSorteBool, VectroBool);
-	// exceptions
 	TryCatchLoop("An exception occurred. Exception ConfigFileBool - ", "ConfigFileBool", ConfigFile, PL1->my_Param.ConfigFileBool, VectroBool);
 	// exceptions
 	TryCatchLoop("An exception occurred. Exception BlechAusFuellungBool - ", "BlechAusFuellungBool", BlechAusFuellung, PL1->my_Param.BlechAusFuellungBool, VectroBool);
+
+	TryCatchLoop("An exception occurred. Exception BackzeitBool - ", "BackzeitBool", BackzeitEnum, PL1->my_Param.BackzeitBool, VectroBool);
+	// exceptions
+	TryCatchLoop("An exception occurred. Exception TemperaturBool - ", "TemperaturBool", TemperaturBoolEnum, PL1->my_Param.TemperaturBool, VectroBool);
 
 	//Pruefe BOOL Vector fuer ZusammenfassungBool
 
@@ -194,14 +280,16 @@ int ParameterListe::SetBlechAusfuelungTrueFalse(bool TrueFalse)
 	return 0;
 }
 
-
-int ParameterListe::SetTeigSorteTrueFalse(bool TrueFalse)
+int ParameterListe::SetBackzeitTrueFalse(bool)
 {
-	ParameterListe* PL1;
-	PL1 = AutomatSteuerungParameterListe->getParameterListe();
-	PL1->my_Param.TeigSorteBool = TrueFalse;
 	return 0;
 }
+
+int ParameterListe::SetTemperaturTrueFalse(bool)
+{
+	return 0;
+}
+
 
 int ParameterListe::SetZusammenfassungFuncTrueFalse(bool TrueFalse)
 {

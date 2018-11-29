@@ -35,12 +35,38 @@ AutomatSteuerung::~AutomatSteuerung()
 
 }
 
+void AutomatSteuerung::SetrezeptRrezepteinlesen(rezept * rezepteinlesen1)
+{
+	rezepteinlesen = rezepteinlesen1;
+}
+
+void AutomatSteuerung::SetlagerVerwaltunglgVerwaltung(lagerVerwaltung * lgVerwaltung1)
+{
+lgVerwaltung = lgVerwaltung1;
+}
+
+rezept * AutomatSteuerung::GetrezeptRrezepteinlesen()
+{
+	return rezepteinlesen;
+}
+
+lagerVerwaltung * AutomatSteuerung::GetlagerVerwaltunglgVerwaltung()
+{
+	return lgVerwaltung;
+}
+
 void AutomatSteuerung::plaetzchenAnzahlErmitteln()
 {
 }
 
-void AutomatSteuerung::blechAnzahlErmitteln()
+void AutomatSteuerung::blechAnzahlErmitteln(double plaetzchenAnzahl, double plaetzchenAnzahlProBlech)
 {
+	blechAnzahl= (int)plaetzchenAnzahl / plaetzchenAnzahlProBlech;
+}
+
+int AutomatSteuerung::getblechAnzahl()
+{
+	return blechAnzahl;
 }
 
 void AutomatSteuerung::blechBelegen()
@@ -255,10 +281,14 @@ int AutomatSteuerung::AbkuehlenVerzierungen(int BackZeitIn)
 	ZeitMapping = BackZeitIn + (BackZeitIn * 2) + 20;
 	return ZeitMapping;
 }
-
-void AutomatSteuerung::VerweilDauerBestimmen()
+/** 
+* Es wird angenommen dass der Ofen eine Breite von 4 m hat
+* 4m wird durch  die Geschwindigkeit dividiert, um ein Verweildauer zu bekommen
+*@ Parameter Geschwindigkeit in m/s
+*/
+double  AutomatSteuerung::VerweilDauerBestimmen(double geschwindigkeit)
 {
-
+	return(4 / geschwindigkeit);
 }
 
 
@@ -354,7 +384,6 @@ void AutomatSteuerung::setOfenSteuerung(OfenSteuerung * setOfSteu1)
 {
 	OfnSu = setOfSteu1;
 }
-
 int AutomatSteuerung::GetJobQueueStatus()
 {
 	return JobQueueStatus;
