@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ParameterListe.h"
-#include "Ofen.h";
+#include "Ofen.h"
 #include <iostream>
 #include <string>
 #include <bitset>
