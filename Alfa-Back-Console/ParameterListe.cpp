@@ -18,6 +18,10 @@
 #include <mutex>
 using namespace std;
 
+//rezept * rezepteinlesen3 = AutomatSteuerungParameterListe->GetrezeptRrezepteinlesen();
+//rezepteinlesen3->
+//return Bestand;
+
 ParameterListe::ParameterListe()
 {
 }
@@ -36,11 +40,9 @@ bool ParameterListe::ZutatenPruefen()//map <string,zutat>
 {
 	lagerVerwaltung * lgVerwaltung3 = AutomatSteuerungParameterListe->GetlagerVerwaltunglgVerwaltung();
 	bool Bestand = lgVerwaltung3->getLagerzustand();
+	//std::cout << Bestand << "- bool Bestand = lgVerwaltung3->getLagerzustand(); " << endl;
 	SetSetZutatenTrueFalse(Bestand);
 	return Bestand;
-	//rezept * rezepteinlesen3 = AutomatSteuerungParameterListe->GetrezeptRrezepteinlesen();
-	//rezepteinlesen3->
-	//return Bestand;
 }
 
 bool ParameterListe::TeigPruefen()
@@ -166,6 +168,15 @@ bool ParameterListe::ZusammenfassungFunc()
 	ParameterListe* PL1;
 	PL1 = AutomatSteuerungParameterListe->getParameterListe();
 
+	ZutatenPruefen();
+	TeigPruefen();
+	FormPruefen();
+	ConfigPruefen();
+	Teigroesse();
+	BlechAusfuelungPruefen();
+	BackzeitPruefen();
+	TemperaturPruefen();
+
 /* 
 	Param sParam1;
 	//Param *Param_1;
@@ -204,14 +215,14 @@ bool ParameterListe::ZusammenfassungFunc()
 
 	if ((PL1->HashretSave) != Hashret) // keine Status-Veraenderung 
 	{
-		cout << "HashretSave -  " << PL1->HashretSave << endl;
-		cout << "Hash_str -  " << Hashret << endl;
+		//cout << "HashretSave -  " << PL1->HashretSave << endl;
+		//cout << "Hash_str -  " << Hashret << endl;
 		PL1->HashretSave = Hashret;
 	//cout << "Exception Matrix Hash_str -  " << Hash_str << endl;
 
 	if (HashGruen.compare(Hash_str) != 0)
 	{
-		std::cout << HashGruen << "- HashGruen is not Exception Matrix Hash : " << Hash_str << endl;
+		//std::cout << HashGruen << "- HashGruen is not Exception Matrix Hash : " << Hash_str << endl;
 		PL1->my_Param2.ZusammenfassungBool = false;
 	}
 
@@ -351,7 +362,8 @@ int ParameterListe::TryCatchLoop(string ExceptMessageS, string CoutMessages, int
 	}
 	catch (int e)
 	{
-		cout << ExceptMessageS << e << endl;
+		//cout << ExceptMessageS << e << endl;
+		cout << "Exception Matrix :" << endl;
 		for (ITERator = VectorBoolPL.begin(); ITERator != VectorBoolPL.end(); ITERator++)
 		{
 			cout << *ITERator;
