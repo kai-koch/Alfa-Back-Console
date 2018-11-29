@@ -39,6 +39,8 @@ private:
         lagerBestandVezgen.insert(pair<string, zutat*>("Walnuesse", new zutat("Walnuesse", 10000, "g")));
         lagerBestandVezgen.insert(pair<string, zutat*>("Haselnuesse", new zutat("Haselnuesse", 10000, "g")));        
     }
+	///sagt aus, ob die fuer die Bestellung genug ware ist  
+	bool lagerZustand;
 
 public:
 	/**
@@ -64,8 +66,12 @@ public:
 	*/
 	void bestellMengeAbziehenLage(map<string, zutat*> zutatMenge, map<string, zutat*> verzierungMenge);
 	/**
-	 * lagerbestand anzeigen lassen
-	 */
+	* gibt die boolesche Variable lageZustand zurück.
+	*/
+	bool getLagerzustand();
+	/**
+	* lagerbestand anzeigen lassen
+	*/
 	void lagerBestandAnzeigen();
 	/**
 	 * @Constructor
