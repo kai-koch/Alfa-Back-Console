@@ -139,11 +139,11 @@ bool ParameterListe::TemperaturPruefen()
 	int getAktuellTemperatur;
 
 	rezept * rezepteinlesen3 = AutomatSteuerungParameterListe->GetrezeptRrezepteinlesen();
-	getBackTemperatur = rezepteinlesen3->getBackTemperatur();
+	getBackTemperatur = (int)rezepteinlesen3->getBackTemperatur();
 
 	Ofen * Ofen4;
 	Ofen4 = AutomatSteuerungParameterListe->getOfen();
-	getAktuellTemperatur = Ofen4->getTemperatur();
+	getAktuellTemperatur = (int)Ofen4->getTemperatur();
 
 	if (getBackTemperatur = getAktuellTemperatur)
 	{
@@ -381,13 +381,16 @@ int ParameterListe::TryCatchLoop(string ExceptMessageS, string CoutMessages, int
 	catch (int e)
 	{
 		//cout << ExceptMessageS << e << endl;
-		cout << "Rückmeldung einer real existierenden Maschine - Exception Matrix :" << endl;
+        if(e) 
+        {
+            cout << "Rückmeldung einer real existierenden Maschine - Exception Matrix :" << endl;
+        }
 		for (ITERator = VectorBoolPL.begin(); ITERator != VectorBoolPL.end(); ITERator++)
 		{
 			cout << *ITERator;
 		}
 		cout << endl << endl;
-
+        
 		cout << "Matrix:\n 1.Zutaten,\n 2.Teig,\n 3.Form,\n 4.ConfigFile,\n 5.BackzeitEnum,\n 6.TemperaturBoolEnum" << endl;
 		cout << "_____________________" << endl << endl;
 		return false;
