@@ -38,6 +38,23 @@ rezept* rezept::getKonfigdatei()
 	return schokoPlaetzchen;
 }
 
+string rezept::toString()
+{
+
+    vector<string> config;
+    config[0] = "teigname:" + getTeigName();
+    config[1] = "basisAnzahl:" +  to_string(getBasisPlaetzchenAnzahl());
+    config[2] = "form:" + getForm();
+    config[3] = "groesse:" + getPlaetzchenGroesse();
+    config[4] = "backTemperatur:" + to_string(getBackTemperatur());
+    config[5] = "backZeit:" + to_string(getBackZeit());
+    config[6] = getZutatenWriteStr();
+    config[7] = getVerzierungenWriteStr();
+    return werkzeuge::join("\t", config);
+
+    return string();
+}
+
 void rezept::setTeigname(string tn)
 {
     tgName = tn;
@@ -68,13 +85,36 @@ void rezept::setBackzeit(double zeit)
     backZt = zeit;
 }
 
+string rezept::getZutatenWriteStr()
+{
+    vector<string> zuts;
+    int i = 0;
+    for (std::map<string, zutat*>::iterator it = zutaten.begin(); it != zutaten.end(); ++it)
+    {
+        zuts[i] = it->second->toString();
+        i += 1;
+    }
+
+    return "Zutaten:" + werkzeuge::join("|", zuts);
+}
+
+string rezept::getVerzierungenWriteStr()
+{
+    vector<string> zuts;
+    int i = 0;
+    for (std::map<string, zutat*>::iterator it = verzierungen.begin(); it != verzierungen.end(); ++it)
+    {
+        zuts[i] = it->second->toString();
+        i += 1;
+    }
+
+    return "Verzierungen:" + werkzeuge::join("|", zuts);
+}
+
 map<string, zutat*> rezept::getZutatMenge()
 {
 	return zutaten;
 }
-
-
-
 
 map<string, zutat*> rezept::getVerzierungsMenge()
 {
@@ -143,10 +183,6 @@ double rezept::getBackZeit()
 	return backZt;
 }
 
-rezept::rezept()
-{
-}
+rezept::rezept() {}
 
-rezept::~rezept()
-{
-}
+rezept::~rezept() {}

@@ -1,6 +1,9 @@
 #pragma once
-#include "zutat.h"
+#include <vector>
 #include <map>
+#include "werkzeuge.h"
+#include "zutat.h"
+
 using namespace std;
 
 /**
@@ -141,12 +144,22 @@ public:
      */
     rezept* getKonfigdatei();
     
+    /**
+     * Gibt das Rezept als datenzeilen-string zurueck
+     * @returns serialisierter String der Rezept-Klasse
+     */
+    string toString();
 
+    // Setter
     void setTeigname(string tn);
     void setAnzahl(double anz);
     void setForm(string frm);
     void setGroesse(string gr);
     void setBacktemperatur(double temp);
     void setBackzeit(double zeit);
+
+    string getZutatenWriteStr();
+    string getVerzierungenWriteStr();
+
 	~rezept();
 };
