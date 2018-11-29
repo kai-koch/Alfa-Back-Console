@@ -8,7 +8,7 @@ using namespace std;
 double Ofen::getTemperatur()
 {
 	
-	cout << "Ofen::getTemperatur(int Temperatur)" << endl;
+	//cout << "Ofen::getTemperatur(int Temperatur) - " << Temperatur << endl;
 	return Temperatur;
 
 }

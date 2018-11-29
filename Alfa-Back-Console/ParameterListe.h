@@ -66,7 +66,7 @@ public:
 		//1.
 		bool ZutatenBool = false; // +
 		///////////// 2.
-		bool TeigBool = true; // + 
+		bool TeigBool = false; // + 
 		////////////3.
 		bool FormBool = false; //String +
 		////// 
@@ -74,12 +74,12 @@ public:
 		/////
 		bool ConfigFileBool = false; // -
 		/////
-		bool BlechAusFuellungBool = true;  // BlechMenge // Rest -
+		bool BlechAusFuellungBool = false;  // BlechMenge // Rest -
 		////
-		bool BackzeitBool = true; // -
+		bool BackzeitBool = false; // -
 		//bool Backzeit = true // + 40 Min Kneten usw.
 		//Temperatur //
-		bool TemperaturBool = true;// +
+		bool TemperaturBool = false;// +
 	};
 	Param my_Param;
 
