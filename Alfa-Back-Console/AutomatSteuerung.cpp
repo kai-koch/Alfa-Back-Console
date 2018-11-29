@@ -59,9 +59,14 @@ void AutomatSteuerung::plaetzchenAnzahlErmitteln()
 {
 }
 
-int AutomatSteuerung::blechAnzahlErmitteln(double plaetzchenAnzahl, double plaetzchenAnzahlProBlech)
+void AutomatSteuerung::blechAnzahlErmitteln(double plaetzchenAnzahl, double plaetzchenAnzahlProBlech)
 {
-	return (int)plaetzchenAnzahl / plaetzchenAnzahlProBlech;
+	blechAnzahl= (int)plaetzchenAnzahl / plaetzchenAnzahlProBlech;
+}
+
+int AutomatSteuerung::getblechAnzahl()
+{
+	return blechAnzahl;
 }
 
 void AutomatSteuerung::blechBelegen()

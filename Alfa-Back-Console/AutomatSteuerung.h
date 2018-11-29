@@ -36,6 +36,7 @@ class AutomatSteuerung
 	lagerVerwaltung * lgVerwaltung;
 
 	int JobQueueStatus;
+	int blechAnzahl;
 public:
 	void SetrezeptRrezepteinlesen(rezept* rezepteinlesen1);
 	void SetlagerVerwaltunglgVerwaltung(lagerVerwaltung * lgVerwaltung1);
@@ -44,7 +45,8 @@ public:
 
 
 	void plaetzchenAnzahlErmitteln();
-	int blechAnzahlErmitteln(double plaetzchenAnzahl, double plaetzchenAnzahlProBlech);
+	void blechAnzahlErmitteln(double plaetzchenAnzahl, double plaetzchenAnzahlProBlech);
+	int getblechAnzahl();
 	void blechBelegen();
 	void Backen(int);
 	int AbkuehlenVerzierungen(int BackZeitIn);
