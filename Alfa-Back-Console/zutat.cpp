@@ -10,6 +10,14 @@ zutat::zutat(string zutatName, double zutatMenge, string zutatEinheit)
 	masseinheit = zutatEinheit;
 }
 
+zutat::zutat(string commaString)
+{
+    vector<string> daZutat = werkzeuge::split(commaString, ',');
+    name = daZutat[0];
+    menge = stod(daZutat[1]);
+    masseinheit = daZutat[2];
+}
+
 string zutat::getName()
 {
 	return name;

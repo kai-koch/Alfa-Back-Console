@@ -44,15 +44,13 @@ public:
 
 
 	void plaetzchenAnzahlErmitteln();
-	void blechAnzahlErmitteln();
+	int blechAnzahlErmitteln(double plaetzchenAnzahl, double plaetzchenAnzahlProBlech);
 	void blechBelegen();
 	void Backen(int);
 	int AbkuehlenVerzierungen(int BackZeitIn);
-	void VerweilDauerBestimmen();
-
+	double VerweilDauerBestimmen(double geschwindigkeit);
 	void InitClassen(AutomatSteuerung * As);
 	void InitDelete(AutomatSteuerung * As);
-
 	Ofen *  getOfen();
 	Band * getBand();
 	AusnahmenUndThreadsMon * getAusnahmenUndThreadsMon();
@@ -64,6 +62,7 @@ public:
 	void setAusnahmenUndThreadsMon(AusnahmenUndThreadsMon * ATM1);
 	void setParameterListe(ParameterListe * PL1);
 	void setOfenSteuerung(OfenSteuerung * setOfSteu1);
+	
 
 	int GetJobQueueStatus();
 	void SetJobQueueStatus(int Status);

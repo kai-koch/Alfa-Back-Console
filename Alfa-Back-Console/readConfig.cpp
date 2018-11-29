@@ -2,7 +2,7 @@
 #include "readConfig.h"
 
 
-readConfig::readConfig() {}
+//readConfig::readConfig() {}
 
 
 int readConfig::check_error_bits(ifstream* f)
@@ -23,48 +23,63 @@ int readConfig::check_error_bits(ifstream* f)
     return stop;
 }
 
-rezept* readConfig::buildRezept(string line)
+rezept * readConfig::buildRezept(string line)
 {
     rezept* daRezept = new rezept("Default", 100.0, "Default", "klein", 180.0, 40.0);
     /*
     teigname:Schokokeks	basisAnzahl:10000	form:Kreis	groesse:mittel	backTemperatur:180	backZeit:40	Zutaten:Backpulver,10000,g|Eier,0,9|Kakao,70000,g|Mehl,90000,g|Milch,400,l|Pflanzenfett,50000,g|Zucker,100000,g	Verzierungen:Kakaoguss,0,3|Schokostreusel,30000,g
     */
-    vector<string> columns = split(line, '\t');
+    vector<string> columns = werkzeuge::split(line, '\t');
     for(int i=0; i < columns.size(); i += 1)
     {
-        vector<string> field = split(columns[i], ':');
+        vector<string> field = werkzeuge::split(columns[i], ':');
         if (field[0] == "teigname")
         {
-            
+            daRezept->setTeigname(field[0]);
         }
-        if (field[0] == "teigname")
+        if (field[0] == "basisAnzahl")
         {
-
+            daRezept->setAnzahl(stod(field[0]));
         }
-        if (field[0] == "teigname")
+        if (field[0] == "form")
         {
-
+            daRezept->setForm(field[0]);
         }
-        if (field[0] == "teigname")
+        if (field[0] == "groesse")
         {
-
+            daRezept->setGroesse(field[0]);
         }
-        if (field[0] == "teigname")
+        if (field[0] == "backTemperatur")
         {
-
+            daRezept->setBacktemperatur(stod(field[0]));
         }
-        if (field[0] == "teigname")
+        if (field[0] == "backZeit")
         {
-
+            daRezept->setBackzeit(stod(field[0]));
+        }
+        if (field[0] == "Zutaten")
+        {
+            vector<string> daZutaten = werkzeuge::split(field[1], '|');
+            for (int j=0; j < daZutaten.size(); j += 1)
+            {
+                daRezept->addZutat(new zutat(daZutaten[j]));
+            }
+        }
+        if (field[0] == "Verzierungen")
+        {
+            vector<string> daZutaten = werkzeuge::split(field[1], '|');
+            for (int j = 0; j < daZutaten.size(); j += 1)
+            {
+                daRezept->addVerzierung(new zutat(daZutaten[j]));
+            }
         }
     }
-
     return daRezept;
 }
 
-rezept* readConfig::readRezept(string filename)
+rezept * readConfig::readRezept(string filename)
 {
-    rezept* daRezept = nullptr;
+    rezept * daRezept = new rezept("Default", 100.0, "Default", "klein", 180.0, 40.0);
     string line;
     ifstream fs(filename);
 
@@ -85,32 +100,6 @@ rezept* readConfig::readRezept(string filename)
     }
     fs.close();
     return daRezept;
-}
-
-const vector<string> readConfig::split(const string & s, const char & c)
-{
-    string buff{ "" };
-    vector<string> v;
-    for(auto n : s)
-    {
-        if(n != c) 
-        {
-            buff += n;
-        }
-        else
-        {
-            if(n == c && buff != "")
-            {
-                v.push_back(buff);
-                buff = ""; 
-            }
-        }
-    }
-    if (buff != "")
-    {
-        v.push_back(buff);}
-
-    return v;
 }
 
 readConfig::~readConfig() {}
