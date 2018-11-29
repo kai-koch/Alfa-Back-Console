@@ -32,7 +32,7 @@ class AutomatSteuerung
 public:
 
 	void plaetzchenAnzahlErmitteln();
-	void blechAnzahlErmitteln(double plaetzchenAnzahl, double plaetzchenAnzahlProBlech);
+	int blechAnzahlErmitteln(double plaetzchenAnzahl, double plaetzchenAnzahlProBlech);
 	void blechBelegen();
 	void Backen(int);
 	int AbkuehlenVerzierungen(int BackZeitIn);
