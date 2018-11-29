@@ -40,19 +40,16 @@ rezept* rezept::getKonfigdatei()
 
 string rezept::toString()
 {
-
     vector<string> config;
-    config[0] = "teigname:" + getTeigName();
-    config[1] = "basisAnzahl:" +  to_string(getBasisPlaetzchenAnzahl());
-    config[2] = "form:" + getForm();
-    config[3] = "groesse:" + getPlaetzchenGroesse();
-    config[4] = "backTemperatur:" + to_string(getBackTemperatur());
-    config[5] = "backZeit:" + to_string(getBackZeit());
-    config[6] = getZutatenWriteStr();
-    config[7] = getVerzierungenWriteStr();
+    config.push_back("teigname:" + getTeigName());
+    config.push_back("basisAnzahl:" +  to_string(getBasisPlaetzchenAnzahl()));
+    config.push_back("form:" + getForm());
+    config.push_back("groesse:" + getPlaetzchenGroesse());
+    config.push_back("backTemperatur:" + to_string(getBackTemperatur()));
+    config.push_back("backZeit:" + to_string(getBackZeit()));
+    config.push_back(getZutatenWriteStr());
+    config.push_back(getVerzierungenWriteStr());
     return werkzeuge::join("\t", config);
-
-    return string();
 }
 
 void rezept::setTeigname(string tn)
@@ -88,27 +85,23 @@ void rezept::setBackzeit(double zeit)
 string rezept::getZutatenWriteStr()
 {
     vector<string> zuts;
-    int i = 0;
     for (std::map<string, zutat*>::iterator it = zutaten.begin(); it != zutaten.end(); ++it)
     {
-        zuts[i] = it->second->toString();
-        i += 1;
+        zuts.push_back(it->second->toString());
     }
 
-    return "Zutaten:" + werkzeuge::join("|", zuts);
+    return string("Zutaten:" + werkzeuge::join("|", zuts));
 }
 
 string rezept::getVerzierungenWriteStr()
 {
     vector<string> zuts;
-    int i = 0;
     for (std::map<string, zutat*>::iterator it = verzierungen.begin(); it != verzierungen.end(); ++it)
     {
-        zuts[i] = it->second->toString();
-        i += 1;
+        zuts.push_back(it->second->toString());
     }
 
-    return "Verzierungen:" + werkzeuge::join("|", zuts);
+    return string("Verzierungen:" + werkzeuge::join("|", zuts));
 }
 
 map<string, zutat*> rezept::getZutatMenge()
