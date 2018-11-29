@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ParameterListe.h"
+#include "Ofen.h";
 #include <iostream>
 #include <string>
 #include <bitset>
@@ -16,7 +17,6 @@
 #include <string>
 #include <mutex>
 using namespace std;
-
 
 ParameterListe::ParameterListe()
 {
@@ -35,12 +35,12 @@ void ParameterListe::setAutomatSteuerungPointer(AutomatSteuerung * ASPM)
 bool ParameterListe::ZutatenPruefen()//map <string,zutat>
 {
 	lagerVerwaltung * lgVerwaltung3 = AutomatSteuerungParameterListe->GetlagerVerwaltunglgVerwaltung();
-	//bool Bestand = lgVerwaltung3->pruefeLageBestand();
-
+	bool Bestand = lgVerwaltung3->getLagerzustand();
+	SetSetZutatenTrueFalse(Bestand);
+	return Bestand;
 	//rezept * rezepteinlesen3 = AutomatSteuerungParameterListe->GetrezeptRrezepteinlesen();
 	//rezepteinlesen3->
 	//return Bestand;
-	return 1;
 }
 
 bool ParameterListe::TeigPruefen()
@@ -107,6 +107,16 @@ bool ParameterListe::Teigroesse()
 
 bool ParameterListe::BlechAusfuelungPruefen()
 {
+	double PlaetzchenAnzahl;
+
+	rezept * rezepteinlesen3 = AutomatSteuerungParameterListe->GetrezeptRrezepteinlesen();
+	rezepteinlesen3->getBasisPlaetzchenAnzahl();
+	//rezepteinlesen3.pla
+
+	//AutomatSteuerungParameterListe->blechAnzahlErmitteln(PlaetzchenAnzahl, );
+
+	//blechAnzahlErmitteln(double plaetzchenAnzahl, double plaetzchenAnzahlProBlech)
+
 	return false;
 }
 
@@ -119,7 +129,26 @@ bool ParameterListe::BackzeitPruefen()
 
 bool ParameterListe::TemperaturPruefen()
 {
-	return false;
+	int getBackTemperatur;
+	int getAktuellTemperatur;
+
+	rezept * rezepteinlesen3 = AutomatSteuerungParameterListe->GetrezeptRrezepteinlesen();
+	getBackTemperatur = rezepteinlesen3->getBackTemperatur();
+
+	Ofen * Ofen4;
+	Ofen4 = AutomatSteuerungParameterListe->getOfen();
+	getAktuellTemperatur = Ofen4->getTemperatur();
+
+	if (getBackTemperatur = getAktuellTemperatur)
+	{
+		SetTemperaturTrueFalse(true);
+		return true;
+	}
+	else
+	{
+		SetTemperaturTrueFalse(false);
+		return false;
+	}
 }
 
 bool ParameterListe::ZusammenfassungFunc()

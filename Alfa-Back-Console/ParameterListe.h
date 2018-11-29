@@ -60,11 +60,11 @@ class ParameterListe : public AutomatSteuerung // Status 3
 	ParamA my_Param2;*/
 
 public:
-
+// Aktuell 01000111
 	struct Param
 	{
 		//1.
-		bool ZutatenBool = false; // +-
+		bool ZutatenBool = false; // +
 		///////////// 2.
 		bool TeigBool = true; // + 
 		////////////3.
@@ -76,10 +76,10 @@ public:
 		/////
 		bool BlechAusFuellungBool = true;  // BlechMenge // Rest -
 		////
-		bool BackzeitBool = true; 
+		bool BackzeitBool = true; // -
 		//bool Backzeit = true // + 40 Min Kneten usw.
 		//Temperatur //
-		bool TemperaturBool = true;
+		bool TemperaturBool = true;// +
 	};
 	Param my_Param;
 
