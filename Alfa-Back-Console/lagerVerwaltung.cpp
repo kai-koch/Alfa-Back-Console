@@ -22,25 +22,29 @@ bool lagerVerwaltung::pruefeLageBestand(map<string,zutat*> zutatMenge, map<strin
 	{
 		
 		string name = it->second->getName();
-		double  menge;
+		double  menge, diff;
 		map<string,zutat*>::iterator it_lagerIteraror=lagerBestandZt.find(name);
 		if (it_lagerIteraror != lagerBestandZt.end())
 		{
 			menge=it_lagerIteraror->second->getMenge();
-			cout << menge << endl;
 			if (it->second->getMenge() <= menge)
 			{
+
 				continue;
 			}
 			else
 			{
+				diff = (it->second->getMenge() - menge);
 				lageZustandZutat = false;
+				cout << " Nicht genug " << name << ", in der lager ist. " << endl << endl;
+				cout << "Ein mindest Menge an " << name << " von " <<diff<<" bestellen. "<< endl << endl;
 			}
 
 		}
 		else
 		{
-			cout << "Der Zutat  " <<name<<" ist nicht in der Lager  vorhande!!"<< endl;
+			cout << "Der Zutat: " <<name<<" ist nicht in der Lager  vorhanden!!"<< endl;
+			
 			lagerBestandZt.insert(pair<string, zutat*>(name, new zutat(name, 0, "")));
 			lageZustandZutat = false;
 			break;
@@ -57,18 +61,19 @@ bool lagerVerwaltung::pruefeLageBestand(map<string,zutat*> zutatMenge, map<strin
 		if(it_lager!=lagerBestandVezgen.end())
 		{ 
 		menge=it_lager->second->getMenge();
-		if(menge >= (it->second)->getMenge())
-		{
+			if(menge >= (it->second)->getMenge())
+			{
 			continue;
-		}
-		else
-		{
+			}else
+			{
+			double	diff = (it->second->getMenge() - menge);
 			lageZustandVerzierungen = false;
-		}
-		}
-		else
+			cout << " Nicht genug  " << name << ", in der lager ist. " << endl << endl;
+			cout << "Ein mindest Menge an " << name << " von " << diff << " bestellen. " << endl << endl;
+			}
+		}else
 		{
-			cout << "Verzierung  " << name << " ist nicht in der Lager  vorhande!!" << endl;
+			cout << "Verzierung  " << name << " ist nicht in der Lager  vorhanden!!" << endl;
 			lagerBestandVezgen.insert(pair<string, zutat*>(name, new zutat(name, 0, "")));
 			lageZustandVerzierungen = false;
 			break;
