@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include <vector>
+#include "werkzeuge.h"
 
 using namespace std;
 
@@ -24,6 +26,13 @@ public:
 	 * @param zutatEinheit Masseinheit der Zutat
 	 */
 	zutat(string zutatName, double zutatMenge, string zutatEinheit);
+
+    /**
+     * @constructor
+     * @param commaString Komma getrennte Zeichenkette der Zutat
+     * @example Milch,1,l
+     */
+    zutat(string commaString);
 
 	/** Getter Name */
 	string getName();

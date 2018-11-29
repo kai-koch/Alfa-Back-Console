@@ -37,11 +37,6 @@ bool ParameterListe::ZutatenPruefen()
 	return false;
 }
 
-bool ParameterListe::VerzierungPruefen()
-{
-	return false;
-}
-
 bool ParameterListe::TeigPruefen()
 {
 	return false;
@@ -101,8 +96,6 @@ bool ParameterListe::ZusammenfassungFunc()
 	// exceptions
 	TryCatchLoop("An exception occurred. Exception ZutatenBool - ", "ZutatenBool", Zutaten, PL1->my_Param.ZutatenBool, VectroBool);
 	// exceptions
-	TryCatchLoop("An exception occurred. Exception VerzierungBool - ", "VerzierungBool", Verzierung, PL1->my_Param.VerzierungBool, VectroBool);
-	// exceptions
 	TryCatchLoop("An exception occurred. Exception TeigBool  - ", "TeigBool", Teig, PL1->my_Param.TeigBool, VectroBool);
 	// exceptions
 	TryCatchLoop("An exception occurred. Exception FormBool  - ", "FormBool", Form, PL1->my_Param.FormBool, VectroBool);
@@ -158,14 +151,6 @@ int ParameterListe::SetSetZutatenTrueFalse(bool TrueFalse)
 	ParameterListe* PL1;
 	PL1 = AutomatSteuerungParameterListe->getParameterListe();
 	PL1->my_Param.ZutatenBool = TrueFalse;
-	return 0;
-}
-
-int ParameterListe::SetVerzierungTrueFalse(bool TrueFalse)
-{
-	ParameterListe* PL1;
-	PL1 = AutomatSteuerungParameterListe->getParameterListe();
-	PL1->my_Param.VerzierungBool = TrueFalse;
 	return 0;
 }
 

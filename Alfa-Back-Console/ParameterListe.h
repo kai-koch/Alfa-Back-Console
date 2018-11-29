@@ -64,10 +64,9 @@ public:
 	struct Param
 	{
 		//1.
-		bool ZutatenBool = false;
-		bool VerzierungBool = true;
+		bool ZutatenBool = false; //		bool VerzierungBool = true;
 		///////////// 2.
-		bool TeigBool = true;
+		bool TeigBool = true; //
 		////////////3.
 		bool FormBool = false; //String
 		////// 
@@ -87,7 +86,6 @@ public:
 	enum Errors
 	{
 		Zutaten,
-		Verzierung,
 		Teig,
 		Form,
 		TeigGroesse,
@@ -110,7 +108,6 @@ public:
 	void setAutomatSteuerungPointer(AutomatSteuerung *  ASPM);
 
 	bool ZutatenPruefen();
-	bool VerzierungPruefen();
 	bool TeigPruefen();
 	bool FormPruefen();
 	bool ConfigPruefen();
@@ -121,7 +118,6 @@ public:
 	int GetErrorListe();
 
 	int SetSetZutatenTrueFalse(bool);
-	int SetVerzierungTrueFalse(bool);
 	int SetTeigTrueFalse(bool);
 	int SetFormTrueFalse(bool);
 	int SetConfigTrueFalse(bool);
