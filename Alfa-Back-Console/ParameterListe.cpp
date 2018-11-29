@@ -113,7 +113,7 @@ bool ParameterListe::BlechAusfuelungPruefen()
 bool ParameterListe::BackzeitPruefen()
 {
 
-	AutomatSteuerungParameterListe->VerweilDauerBestimmen();
+	//AutomatSteuerungParameterListe->VerweilDauerBestimmen();
 	return false;
 }
 
