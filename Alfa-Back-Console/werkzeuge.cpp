@@ -37,11 +37,12 @@ const vector<string> werkzeuge::split(const string & s, const char & c)
 string werkzeuge::join(const string & delimiter, const vector<string>& v)
 {
     string out;
-    auto i = v.begin(), e = v.end();
-    if (i != e)
+    for (unsigned int i = 0; i < v.size(); i += 1)
     {
-        out += *i++;
-        for (; i != e; ++i) out.append(delimiter).append(*i);
+        out += v[i];
+        if((i + 1) < v.size()) {
+            out.append(delimiter);
+        }
     }
     return out;
 }

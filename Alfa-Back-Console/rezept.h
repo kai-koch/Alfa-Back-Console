@@ -52,9 +52,8 @@ private:
 	string plaetzchenGroesse;
 
     /** priv @Constructor */
-   
+    rezept();
 public:
-	rezept();
 	/**
 	 * Properties der Klasse setzen
 	 * @construktor
