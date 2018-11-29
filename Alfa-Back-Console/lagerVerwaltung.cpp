@@ -20,36 +20,61 @@ bool lagerVerwaltung::pruefeLageBestand(map<string,zutat*> zutatMenge, map<strin
 	// Schleife zu ueberpruefen von Verfuegbarkeit des Zutaten Bestandes
 	for (map<string, zutat*>::iterator it = zutatMenge.begin(); it != zutatMenge.end(); it++)
 	{
+		
 		string name = it->second->getName();
-		cout << " name gesucht zutat " << name << endl;
-		double  menge = lagerBestandZt.find(name)->second->getMenge();
-		cout << " suchende menge " << menge<<endl;
-		if (it->second->getMenge()<=menge)
+		double  menge;
+		map<string,zutat*>::iterator it_lagerIteraror=lagerBestandZt.find(name);
+		if (it_lagerIteraror != lagerBestandZt.end())
 		{
-			lageZustandZutat = true;
-		}	
-		else 
+			menge=it_lagerIteraror->second->getMenge();
+			cout << menge << endl;
+			if (it->second->getMenge() <= menge)
+			{
+				continue;
+			}
+			else
+			{
+				lageZustandZutat = false;
+			}
+
+		}
+		else
 		{
+			cout << "Der Zutat  " <<name<<" ist nicht in der Lager  vorhande!!"<< endl;
+			lagerBestandZt.insert(pair<string, zutat*>(name, new zutat(name, 0, "")));
 			lageZustandZutat = false;
+			break;
 		}
 	}
-	cout << "zutat geprueft " << endl<< endl;
+	
 	// Schleife zu ueberpruefen von Verfuegbarkeit der Verzierungen Bestandes
 	for (map<string, zutat*>::iterator it = verzierungMenge.begin(); it != verzierungMenge.end(); it++)
 	{
 		string name = it->second->getName();
-		cout << " name gesucht zutat " << name << endl;
-		double  menge = lagerBestandVezgen.find(name)->second->getMenge();
+		
+		double  menge;
+		map<string, zutat*>::iterator it_lager = lagerBestandVezgen.find(name);
+		if(it_lager!=lagerBestandVezgen.end())
+		{ 
+		menge=it_lager->second->getMenge();
 		if(menge >= (it->second)->getMenge())
 		{
-			lageZustandVerzierungen = true;
+			continue;
 		}
 		else
 		{
 			lageZustandVerzierungen = false;
 		}
+		}
+		else
+		{
+			cout << "Verzierung  " << name << " ist nicht in der Lager  vorhande!!" << endl;
+			lagerBestandVezgen.insert(pair<string, zutat*>(name, new zutat(name, 0, "")));
+			lageZustandVerzierungen = false;
+			break;
+		}
 	}
-	cout << " vorhandene bestell menge in der lage " << (lageZustandZutat & lageZustandVerzierungen) << endl << endl;
+	
 	return (lageZustandZutat&lageZustandVerzierungen);
 }
 //Bestellmenge von der Lage abziehen, falls genug ware da ist.
@@ -81,11 +106,11 @@ void lagerVerwaltung::lagerBestandAnzeigen()
 {
 	for (map<string, zutat*>::iterator it = lagerBestandZt.begin(); it != lagerBestandZt.end(); it++)
 	{
-		cout << "Menge an Zutaten: " << (it->second)->getName() << " ist " << (it->second)->getMenge() << endl;
+		cout << "Aktuell Menge an Zutaten: " << (it->second)->getName() << " ist " << (it->second)->getMenge() << endl;
 	}
 	for (map<string, zutat*>::iterator it = lagerBestandVezgen.begin(); it != lagerBestandVezgen.end(); it++)
 	{
-		cout << "Menge an Verzierungen: " << (it->second)->getName() << " ist " << (it->second)->getMenge() << endl;
+		cout << "Aktuelle Menge an Verzierungen: " << (it->second)->getName() << " ist " << (it->second)->getMenge() << endl;
 	}
 }
 

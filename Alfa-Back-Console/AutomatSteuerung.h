@@ -28,15 +28,14 @@ class AutomatSteuerung
 	AusnahmenUndThreadsMon * AM;
 	ParameterListe * PL;
 	OfenSteuerung * OfnSu;
-
-public:
 	int JobQueueStatus;
+public:
+
 	void plaetzchenAnzahlErmitteln();
 	void blechAnzahlErmitteln();
 	void blechBelegen();
 	void Backen(int);
-	void Abkuehlen(int);
-	void Verzierungen();
+	int AbkuehlenVerzierungen(int BackZeitIn);
 	void VerweilDauerBestimmen();
 
 	void InitClassen(AutomatSteuerung * As);
@@ -53,6 +52,9 @@ public:
 	void setAusnahmenUndThreadsMon(AusnahmenUndThreadsMon * ATM1);
 	void setParameterListe(ParameterListe * PL1);
 	void setOfenSteuerung(OfenSteuerung * setOfSteu1);
+
+	int GetJobQueueStatus();
+	void SetJobQueueStatus(int Status);
 
 	AutomatSteuerung();
 	~AutomatSteuerung();

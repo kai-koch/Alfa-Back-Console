@@ -40,7 +40,6 @@ void divider()
 {
 	const auto SCREEN_WIDTH = 80;
 	cout << setfill('*') << setw(SCREEN_WIDTH) << "\n" << setfill(' ') << endl;
-
 }
 
 //timer(std::chrono::seconds(5), &hello);
