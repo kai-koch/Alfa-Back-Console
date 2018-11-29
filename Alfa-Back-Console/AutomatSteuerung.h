@@ -29,10 +29,12 @@ class AutomatSteuerung
 	ParameterListe * PL;
 	OfenSteuerung * OfnSu;
 	int JobQueueStatus;
+	int blechAnzahl;
 public:
 
 	void plaetzchenAnzahlErmitteln();
-	int blechAnzahlErmitteln(double plaetzchenAnzahl, double plaetzchenAnzahlProBlech);
+	void blechAnzahlErmitteln(double plaetzchenAnzahl, double plaetzchenAnzahlProBlech);
+	int getblechAnzahl();
 	void blechBelegen();
 	void Backen(int);
 	int AbkuehlenVerzierungen(int BackZeitIn);
