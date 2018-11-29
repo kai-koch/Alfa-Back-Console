@@ -64,22 +64,22 @@ public:
 	struct Param
 	{
 		//1.
-		bool ZutatenBool = false; //		bool VerzierungBool = true;
+		bool ZutatenBool = false; // +-
 		///////////// 2.
-		bool TeigBool = true; //
+		bool TeigBool = true; // + 
 		////////////3.
-		bool FormBool = false; //String
+		bool FormBool = false; //String +
 		////// 
-		bool TeigGroesseBool = false; //String
+		bool TeigGroesseBool = false; //String + - 
 		/////
-		bool TeigSorteBool = true; // Config Prüfung 0. 
-		bool ConfigFileBool = false; 
+		bool ConfigFileBool = false; // -
 		/////
-
-		bool BlechAusFuellungBool = true;  // BlechMenge // Rest
-
+		bool BlechAusFuellungBool = true;  // BlechMenge // Rest -
+		////
+		bool BackzeitBool = true; 
 		//bool Backzeit = true // + 40 Min Kneten usw.
 		//Temperatur //
+		bool TemperaturBool = true;
 	};
 	Param my_Param;
 
@@ -89,9 +89,10 @@ public:
 		Teig,
 		Form,
 		TeigGroesse,
-		TeigSorte,
 		ConfigFile,
 		BlechAusFuellung,
+		BackzeitEnum,
+		TemperaturBoolEnum,
 		MaxEnumErrorSIZE
 	};
 
@@ -113,7 +114,10 @@ public:
 	bool ConfigPruefen();
 	bool Teigroesse();
 	bool BlechAusfuelungPruefen();
-	bool TeigSortePruefen();
+
+	bool BackzeitPruefen();
+	bool TemperaturPruefen();
+
 	bool ZusammenfassungFunc();
 	int GetErrorListe();
 
@@ -123,7 +127,10 @@ public:
 	int SetConfigTrueFalse(bool);
 	int SetTeigroesseTrueFalse(bool);
 	int SetBlechAusfuelungTrueFalse(bool);
-	int SetTeigSorteTrueFalse(bool);
+
+	int SetBackzeitTrueFalse(bool);
+	int SetTemperaturTrueFalse(bool);
+
 	int SetZusammenfassungFuncTrueFalse(bool);
 
 	//Param * getsParam1();

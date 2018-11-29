@@ -8,7 +8,8 @@
 #include "Band.h"
 #include "OfenSteuerung.h"
 */
-
+#include "lagerVerwaltung.h"
+#include "rezept.h"
 
 
 
@@ -18,6 +19,8 @@ class Band;
 class AusnahmenUndThreadsMon;
 class ParameterListe;
 class OfenSteuerung;
+class lagerVerwaltung;
+class rezept;
 
 class AutomatSteuerung
 {
@@ -28,8 +31,17 @@ class AutomatSteuerung
 	AusnahmenUndThreadsMon * AM;
 	ParameterListe * PL;
 	OfenSteuerung * OfnSu;
+
+	rezept* rezepteinlesen;
+	lagerVerwaltung * lgVerwaltung;
+
 	int JobQueueStatus;
 public:
+	void SetrezeptRrezepteinlesen(rezept* rezepteinlesen1);
+	void SetlagerVerwaltunglgVerwaltung(lagerVerwaltung * lgVerwaltung1);
+	rezept * GetrezeptRrezepteinlesen();
+	lagerVerwaltung * GetlagerVerwaltunglgVerwaltung();
+
 
 	void plaetzchenAnzahlErmitteln();
 	void blechAnzahlErmitteln();
