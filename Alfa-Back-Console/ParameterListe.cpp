@@ -225,8 +225,12 @@ bool ParameterListe::ZusammenfassungFunc()
 
 	if (HashGruen.compare(Hash_str) != 0)
 	{
-		std::cout << HashGruen << "- HashGruen is not Exception Matrix Hash : " << Hash_str << endl;
+		std::cout << HashGruen << "- Hash - Alles ist gut - ist nicht gleich zu Error Matrix Hash : " << Hash_str << endl;
 		PL1->my_Param2.ZusammenfassungBool = false;
+	}
+	else
+	{
+		PL1->my_Param2.ZusammenfassungBool = true;
 	}
 
 	// exceptions
@@ -370,7 +374,7 @@ int ParameterListe::TryCatchLoop(string ExceptMessageS, string CoutMessages, int
 		}
 		else if (i == true)
 		{
-			std::cout << CoutMessages << " is 1" << endl;
+			//std::cout << CoutMessages << " is 1" << endl;
 		}
 
 	}
@@ -383,6 +387,9 @@ int ParameterListe::TryCatchLoop(string ExceptMessageS, string CoutMessages, int
 			cout << *ITERator;
 		}
 		cout << endl << endl;
+
+		cout << "Matrix:\n 1.Zutaten,\n 2.Teig,\n 3.Form,\n 4.ConfigFile,\n 5.BackzeitEnum,\n 6.TemperaturBoolEnum" << endl;
+		cout << "_____________________" << endl << endl;
 		return false;
 	}
 
