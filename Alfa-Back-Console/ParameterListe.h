@@ -70,11 +70,11 @@ public:
 		////////////3.
 		bool FormBool = false; //String +
 		////// 
-		bool TeigGroesseBool = false; //String + - 
+		//bool TeigGroesseBool = false; //String + - 
 		/////
-		bool ConfigFileBool = false; // -
+		bool ConfigFileBool = false; // +
 		/////
-		bool BlechAusFuellungBool = false;  // BlechMenge // Rest -
+		//bool BlechAusFuellungBool = false;  // BlechMenge // Rest -
 		////
 		bool BackzeitBool = false; // -
 		//bool Backzeit = true // + 40 Min Kneten usw.
@@ -88,9 +88,9 @@ public:
 		Zutaten,
 		Teig,
 		Form,
-		TeigGroesse,
+		//TeigGroesse,
 		ConfigFile,
-		BlechAusFuellung,
+		//BlechAusFuellung,
 		BackzeitEnum,
 		TemperaturBoolEnum,
 		MaxEnumErrorSIZE
@@ -112,8 +112,8 @@ public:
 	bool TeigPruefen();
 	bool FormPruefen();
 	bool ConfigPruefen();
-	bool Teigroesse();
-	bool BlechAusfuelungPruefen();
+	//bool Teigroesse();
+	//bool BlechAusfuelungPruefen();
 
 	bool BackzeitPruefen();
 	bool TemperaturPruefen();
@@ -125,8 +125,8 @@ public:
 	int SetTeigTrueFalse(bool);
 	int SetFormTrueFalse(bool);
 	int SetConfigTrueFalse(bool);
-	int SetTeigroesseTrueFalse(bool);
-	int SetBlechAusfuelungTrueFalse(bool);
+	//int SetTeigroesseTrueFalse(bool);
+	//int SetBlechAusfuelungTrueFalse(bool);
 
 	int SetBackzeitTrueFalse(bool);
 	int SetTemperaturTrueFalse(bool);
